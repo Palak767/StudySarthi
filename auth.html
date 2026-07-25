@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>StudySarthi — Log In / Sign Up</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    min-height:100vh;
+    font-family:'Inter', sans-serif;
+    color:var(--ink);
+    background-color:var(--paper);
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 28px 28px;
+    background-position: -1px -1px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:40px 20px;
+  }
+
+  .brand{
+    position:fixed;
+    top:28px;
+    left:32px;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:1.15rem;
+    letter-spacing:-0.02em;
+  }
+  .brand span{ color:var(--coral); }
+
+  .wrap{
+    width:100%;
+    max-width:420px;
+    position:relative;
+  }
+
+  .card{
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:38px 32px 32px;
+    position:relative;
+    box-shadow: 6px 6px 0 rgba(27,42,74,0.06);
+  }
+
+  /* notebook margin rule */
+  .card::before{
+    content:"";
+    position:absolute;
+    top:0; bottom:0; left:64px;
+    width:1px;
+    background:var(--coral);
+    opacity:0.35;
+  }
+
+  .card > *{ position:relative; z-index:1; }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin:0 0 6px;
+  }
+
+  h1{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:1.6rem;
+    font-weight:700;
+    letter-spacing:-0.01em;
+    margin:0 0 4px;
+  }
+
+  .sub{
+    font-size:0.9rem;
+    color:var(--ink-soft);
+    margin:0 0 24px;
+  }
+
+  .toggle{
+    display:flex;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:3px;
+    margin-bottom:26px;
+  }
+  .toggle button{
+    flex:1;
+    border:none;
+    background:transparent;
+    font-family:'Inter', sans-serif;
+    font-weight:600;
+    font-size:0.85rem;
+    padding:9px 0;
+    border-radius:999px;
+    cursor:pointer;
+    color:var(--ink-soft);
+    transition:background 0.2s, color 0.2s;
+  }
+  .toggle button.active{
+    background:var(--ink);
+    color:#fff;
+  }
+
+  form{ display:none; flex-direction:column; gap:16px; }
+  form.active{ display:flex; }
+
+  .field{ display:flex; flex-direction:column; gap:6px; }
+  .field label{
+    font-size:0.78rem;
+    font-weight:600;
+    color:var(--ink-soft);
+  }
+  .field input, .field select{
+    font-family:'Inter', sans-serif;
+    font-size:0.92rem;
+    padding:11px 12px;
+    border:1px solid var(--line);
+    border-radius:5px;
+    background:var(--paper);
+    color:var(--ink);
+    outline:none;
+    transition:border-color 0.15s, box-shadow 0.15s;
+  }
+  .field input:focus, .field select:focus{
+    border-color:var(--coral);
+    box-shadow:0 0 0 3px rgba(255,111,89,0.15);
+  }
+
+  .row2{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+
+  fieldset{
+    border:1px dashed var(--line);
+    border-radius:6px;
+    padding:12px 14px 14px;
+    margin:0;
+  }
+  fieldset legend{
+    font-size:0.78rem;
+    font-weight:600;
+    color:var(--ink-soft);
+    padding:0 4px;
+  }
+  .chips{ display:flex; flex-wrap:wrap; gap:8px; margin-top:6px; }
+  .chip{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    padding:7px 12px;
+    border-radius:999px;
+    border:1px solid var(--line);
+    background:var(--paper-card);
+    cursor:pointer;
+    user-select:none;
+    color:var(--ink-soft);
+    transition:all 0.15s;
+  }
+  .chip input{ display:none; }
+  .chip.checked{
+    background:var(--highlighter);
+    border-color:var(--highlighter);
+    color:var(--ink);
+  }
+
+  .submit{
+    margin-top:6px;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    font-size:0.95rem;
+    color:#fff;
+    background:var(--coral);
+    border:none;
+    border-radius:5px;
+    padding:13px 0;
+    cursor:pointer;
+    transition:transform 0.12s, box-shadow 0.12s;
+  }
+  .submit:hover{ transform:translateY(-1px); box-shadow:3px 4px 0 rgba(27,42,74,0.15); }
+  .submit:active{ transform:translateY(0); box-shadow:none; }
+
+  .foot{
+    margin-top:18px;
+    font-size:0.8rem;
+    color:var(--ink-soft);
+    text-align:center;
+  }
+  .foot a{ color:var(--coral); text-decoration:none; font-weight:600; }
+
+  .status-tag{
+    position:absolute;
+    top:-11px;
+    right:24px;
+    background:var(--teal);
+    color:#fff;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.65rem;
+    letter-spacing:0.05em;
+    padding:4px 10px;
+    border-radius:4px;
+    transform:rotate(2deg);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .submit{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="brand">Study<span>Sarthi</span></div>
+
+  <div class="wrap">
+    <div class="card">
+      <span class="status-tag">local demo · no backend yet</span>
+      <p class="eyebrow">Student Workspace</p>
+      <h1 id="heading">Welcome back</h1>
+      <p class="sub" id="subtext">Log in to pick up where you left off.</p>
+
+      <div class="toggle">
+        <button type="button" class="active" data-target="login">Log In</button>
+        <button type="button" data-target="signup">Sign Up</button>
+      </div>
+
+      <!-- LOGIN -->
+      <form id="login" class="active" onsubmit="return handleSubmit(event,'login')">
+        <div class="field">
+          <label for="login-id">Email or username</label>
+          <input id="login-id" type="text" placeholder="you@college.edu" required>
+        </div>
+        <div class="field">
+          <label for="login-pw">Password</label>
+          <input id="login-pw" type="password" placeholder="••••••••" required>
+        </div>
+        <button class="submit" type="submit">Log In</button>
+        <p class="foot">New here? <a href="#" onclick="switchForm('signup');return false;">Create an account</a></p>
+      </form>
+
+      <!-- SIGNUP -->
+      <form id="signup" onsubmit="return handleSubmit(event,'signup')">
+        <div class="field">
+          <label for="su-name">Full name</label>
+          <input id="su-name" type="text" placeholder="Palak Rani" required>
+        </div>
+        <div class="field">
+          <label for="su-email">Email</label>
+          <input id="su-email" type="email" placeholder="you@college.edu" required>
+        </div>
+        <div class="row2">
+          <div class="field">
+            <label for="su-pw">Password</label>
+            <input id="su-pw" type="password" placeholder="••••••••" required>
+          </div>
+          <div class="field">
+            <label for="su-pw2">Confirm</label>
+            <input id="su-pw2" type="password" placeholder="••••••••" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="su-college">College / University</label>
+          <input id="su-college" type="text" placeholder="e.g. Amity University" required>
+        </div>
+        <div class="field">
+          <label for="su-year">Year of study</label>
+          <select id="su-year" required>
+            <option value="">Select year</option>
+            <option>1st Year</option>
+            <option>2nd Year</option>
+            <option>3rd Year</option>
+            <option>4th Year</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <fieldset>
+          <legend>What do you want to focus on first?</legend>
+          <div class="chips">
+            <label class="chip"><input type="checkbox" value="academics"> Academics</label>
+            <label class="chip"><input type="checkbox" value="coding"> Coding Practice</label>
+            <label class="chip"><input type="checkbox" value="internships"> Internships</label>
+            <label class="chip"><input type="checkbox" value="career"> Career Goals</label>
+          </div>
+        </fieldset>
+        <button class="submit" type="submit">Create Account</button>
+        <p class="foot">Already have an account? <a href="#" onclick="switchForm('login');return false;">Log in</a></p>
+      </form>
+
+    </div>
+  </div>
+
+<script>
+  const toggleBtns = document.querySelectorAll('.toggle button');
+  const heading = document.getElementById('heading');
+  const subtext = document.getElementById('subtext');
+
+  function switchForm(target){
+    document.querySelectorAll('form').forEach(f => f.classList.toggle('active', f.id === target));
+    toggleBtns.forEach(b => b.classList.toggle('active', b.dataset.target === target));
+    if(target === 'login'){
+      heading.textContent = 'Welcome back';
+      subtext.textContent = 'Log in to pick up where you left off.';
+    } else {
+      heading.textContent = 'Create your workspace';
+      subtext.textContent = 'One place for academics, coding, and internships.';
+    }
+  }
+
+  toggleBtns.forEach(btn => btn.addEventListener('click', () => switchForm(btn.dataset.target)));
+
+  document.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const input = chip.querySelector('input');
+      input.checked = !input.checked;
+      chip.classList.toggle('checked', input.checked);
+    });
+  });
+
+  function handleSubmit(e, type){
+    e.preventDefault();
+    // No backend yet — this is a static frontend placeholder.
+    // Real auth (e.g. Firebase/Supabase) gets wired in later.
+    window.location.href = 'dashboard.html';
+    return false;
+  }
+</script>
+
+</body>
+</html>

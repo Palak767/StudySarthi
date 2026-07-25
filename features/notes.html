@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Smart Notes — StudySarthi</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+<!-- shared site stylesheet: adjust path if this file moves -->
+<link rel="stylesheet" href="../css/style.css">
+
+<style>
+  body{ background-color:var(--paper); }
+
+  .feature-header{
+    background:var(--white);
+    border-bottom:1px solid var(--border);
+    padding:20px 0;
+  }
+  .feature-header .container{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .back-link{
+    font-family:var(--font-body);
+    font-weight:600;
+    font-size:0.9rem;
+    color:var(--ink-soft);
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+  }
+  .back-link:hover{ color:var(--coral); }
+
+  .notes-page{
+    padding:48px 0 80px;
+  }
+
+  .notes-intro{
+    margin-bottom:36px;
+    max-width:640px;
+  }
+  .notes-intro .eyebrow{
+    font-family:var(--font-mono);
+    font-size:0.75rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--coral);
+    margin-bottom:8px;
+  }
+  .notes-intro h1{
+    font-family:var(--font-display);
+    font-size:2.2rem;
+    margin-bottom:10px;
+  }
+  .notes-intro p{
+    color:var(--ink-soft);
+    line-height:1.6;
+  }
+  .storage-note{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    margin-top:14px;
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    color:var(--ink-soft);
+    background:var(--white);
+    border:1px dashed var(--border);
+    padding:6px 12px;
+    border-radius:999px;
+  }
+
+  .notes-layout{
+    display:grid;
+    grid-template-columns:340px 1fr;
+    gap:28px;
+    align-items:start;
+  }
+
+  .composer{
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-sm);
+    padding:22px;
+    position:sticky;
+    top:24px;
+  }
+  .composer h2{
+    font-family:var(--font-display);
+    font-size:1.1rem;
+    margin-bottom:16px;
+  }
+  .field{ display:flex; flex-direction:column; gap:6px; margin-bottom:14px; }
+  .field label{
+    font-size:0.78rem;
+    font-weight:600;
+    color:var(--ink-soft);
+  }
+  .field input, .field select, .field textarea{
+    font-family:var(--font-body);
+    font-size:0.9rem;
+    padding:10px 12px;
+    border:1px solid var(--border);
+    border-radius:var(--radius-sm);
+    background:var(--paper);
+    color:var(--ink);
+    outline:none;
+    resize:vertical;
+  }
+  .field textarea{ min-height:120px; line-height:1.5; }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    border-color:var(--coral);
+    box-shadow:0 0 0 3px rgba(255,111,89,0.15);
+  }
+  .save-btn{
+    width:100%;
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:0.9rem;
+    color:var(--white);
+    background:var(--coral);
+    border:none;
+    border-radius:var(--radius-sm);
+    padding:12px 0;
+    cursor:pointer;
+    transition:transform 0.12s;
+  }
+  .save-btn:hover{ transform:translateY(-1px); }
+
+  .notes-main-top{
+    display:flex;
+    gap:12px;
+    margin-bottom:18px;
+  }
+  .search-input{
+    flex:1;
+    font-family:var(--font-body);
+    font-size:0.9rem;
+    padding:10px 14px;
+    border:1px solid var(--border);
+    border-radius:var(--radius-sm);
+    background:var(--white);
+    outline:none;
+  }
+  .search-input:focus{ border-color:var(--coral); }
+  .filter-select{
+    font-family:var(--font-body);
+    font-size:0.9rem;
+    padding:10px 12px;
+    border:1px solid var(--border);
+    border-radius:var(--radius-sm);
+    background:var(--white);
+  }
+
+  .notes-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
+    gap:16px;
+  }
+  .note-card{
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:var(--radius-md);
+    box-shadow:var(--shadow-sm);
+    padding:18px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    transition:transform 0.15s, box-shadow 0.15s;
+  }
+  .note-card:hover{
+    transform:translate(-2px,-2px);
+    box-shadow:7px 7px 0 rgba(27,42,74,.1);
+  }
+  .note-tag{
+    align-self:flex-start;
+    font-family:var(--font-mono);
+    font-size:0.68rem;
+    padding:4px 10px;
+    border-radius:999px;
+    background:rgba(255,111,89,.12);
+    color:var(--coral);
+  }
+  .note-card h3{
+    font-family:var(--font-display);
+    font-size:1rem;
+  }
+  .note-card p{
+    color:var(--ink-soft);
+    font-size:0.85rem;
+    line-height:1.5;
+    white-space:pre-wrap;
+    max-height:110px;
+    overflow:hidden;
+  }
+  .note-card-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:auto;
+    padding-top:10px;
+    border-top:1px solid var(--border);
+  }
+  .note-date{
+    font-family:var(--font-mono);
+    font-size:0.68rem;
+    color:var(--ink-soft);
+  }
+  .note-actions{ display:flex; gap:10px; }
+  .note-actions button{
+    background:none;
+    border:none;
+    cursor:pointer;
+    color:var(--ink-soft);
+    font-size:0.78rem;
+    font-weight:600;
+    font-family:var(--font-body);
+  }
+  .note-actions button.delete-btn:hover{ color:var(--coral); }
+  .note-actions button.edit-btn:hover{ color:var(--teal); }
+
+  .empty-state{
+    grid-column:1/-1;
+    text-align:center;
+    padding:60px 20px;
+    color:var(--ink-soft);
+    border:1px dashed var(--border);
+    border-radius:var(--radius-lg);
+    background:var(--white);
+  }
+
+  @media (max-width: 800px){
+    .notes-layout{ grid-template-columns:1fr; }
+    .composer{ position:static; }
+  }
+</style>
+</head>
+<body>
+
+<header class="feature-header">
+  <div class="container">
+    <a href="../index.html" class="logo">StudySarthi</a>
+    <a href="../index.html#features" class="back-link">&larr; Back to Features</a>
+  </div>
+</header>
+
+<main class="notes-page">
+  <div class="container">
+
+    <div class="notes-intro">
+      <p class="eyebrow">Feature · Smart Notes</p>
+      <h1>Keep every subject in one place</h1>
+      <p>Write, tag, and search your notes without digging through five different apps. Organize by subject and find what you need in seconds.</p>
+      <span class="storage-note">💾 Saved to this browser only — no account sync yet</span>
+    </div>
+
+    <div class="notes-layout">
+
+      <div class="composer">
+        <h2 id="composer-title">New Note</h2>
+        <form id="note-form">
+          <input type="hidden" id="edit-id" value="">
+          <div class="field">
+            <label for="note-title">Title</label>
+            <input id="note-title" type="text" placeholder="e.g. Newton's Laws" required>
+          </div>
+          <div class="field">
+            <label for="note-subject">Subject</label>
+            <input id="note-subject" type="text" placeholder="e.g. Physics" required>
+          </div>
+          <div class="field">
+            <label for="note-content">Note</label>
+            <textarea id="note-content" placeholder="Write your notes here..." required></textarea>
+          </div>
+          <button type="submit" class="save-btn" id="save-btn">Save Note</button>
+        </form>
+      </div>
+
+      <div class="notes-main">
+        <div class="notes-main-top">
+          <input type="text" class="search-input" id="search-input" placeholder="Search notes...">
+          <select class="filter-select" id="filter-select">
+            <option value="">All Subjects</option>
+          </select>
+        </div>
+        <div class="notes-grid" id="notes-grid"></div>
+      </div>
+
+    </div>
+
+  </div>
+</main>
+
+<script>
+  const STORAGE_KEY = 'studysarthi_notes';
+
+  function loadNotes(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : [];
+    }catch(e){
+      return [];
+    }
+  }
+
+  function saveNotes(notes){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
+  }
+
+  let notes = loadNotes();
+
+  const form = document.getElementById('note-form');
+  const grid = document.getElementById('notes-grid');
+  const searchInput = document.getElementById('search-input');
+  const filterSelect = document.getElementById('filter-select');
+  const composerTitle = document.getElementById('composer-title');
+  const saveBtn = document.getElementById('save-btn');
+  const editIdField = document.getElementById('edit-id');
+
+  function formatDate(iso){
+    const d = new Date(iso);
+    return d.toLocaleDateString(undefined, { month:'short', day:'numeric', year:'numeric' });
+  }
+
+  function refreshSubjectFilter(){
+    const subjects = [...new Set(notes.map(n => n.subject))].sort();
+    const current = filterSelect.value;
+    filterSelect.innerHTML = '<option value="">All Subjects</option>' +
+      subjects.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join('');
+    filterSelect.value = subjects.includes(current) ? current : '';
+  }
+
+  function escapeHtml(str){
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function render(){
+    const query = searchInput.value.trim().toLowerCase();
+    const subjectFilter = filterSelect.value;
+
+    const filtered = notes
+      .filter(n => !subjectFilter || n.subject === subjectFilter)
+      .filter(n => !query || (n.title + ' ' + n.content + ' ' + n.subject).toLowerCase().includes(query))
+      .sort((a,b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+
+    if(filtered.length === 0){
+      grid.innerHTML = `<div class="empty-state">
+        ${notes.length === 0 ? "No notes yet. Add your first one on the left." : "No notes match your search."}
+      </div>`;
+      return;
+    }
+
+    grid.innerHTML = filtered.map(note => `
+      <div class="note-card">
+        <span class="note-tag">${escapeHtml(note.subject)}</span>
+        <h3>${escapeHtml(note.title)}</h3>
+        <p>${escapeHtml(note.content)}</p>
+        <div class="note-card-footer">
+          <span class="note-date">${formatDate(note.updatedAt)}</span>
+          <div class="note-actions">
+            <button class="edit-btn" onclick="editNote('${note.id}')">Edit</button>
+            <button class="delete-btn" onclick="deleteNote('${note.id}')">Delete</button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+
+    refreshSubjectFilter();
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const title = document.getElementById('note-title').value.trim();
+    const subject = document.getElementById('note-subject').value.trim();
+    const content = document.getElementById('note-content').value.trim();
+    const editId = editIdField.value;
+
+    if(editId){
+      const note = notes.find(n => n.id === editId);
+      if(note){
+        note.title = title;
+        note.subject = subject;
+        note.content = content;
+        note.updatedAt = new Date().toISOString();
+      }
+    } else {
+      notes.push({
+        id: 'note_' + Date.now() + '_' + Math.random().toString(36).slice(2,7),
+        title, subject, content,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      });
+    }
+
+    saveNotes(notes);
+    resetForm();
+    render();
+  });
+
+  function resetForm(){
+    form.reset();
+    editIdField.value = '';
+    composerTitle.textContent = 'New Note';
+    saveBtn.textContent = 'Save Note';
+  }
+
+  window.editNote = function(id){
+    const note = notes.find(n => n.id === id);
+    if(!note) return;
+    document.getElementById('note-title').value = note.title;
+    document.getElementById('note-subject').value = note.subject;
+    document.getElementById('note-content').value = note.content;
+    editIdField.value = note.id;
+    composerTitle.textContent = 'Edit Note';
+    saveBtn.textContent = 'Update Note';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  window.deleteNote = function(id){
+    if(!confirm('Delete this note? This can\'t be undone.')) return;
+    notes = notes.filter(n => n.id !== id);
+    saveNotes(notes);
+    render();
+  };
+
+  searchInput.addEventListener('input', render);
+  filterSelect.addEventListener('change', render);
+
+  render();
+</script>
+
+</body>
+</html>
