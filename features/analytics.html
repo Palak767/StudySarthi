@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Progress Analytics — StudySarthi</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/streak-utils.js"></script>
+
+<style>
+  body{ background-color:var(--paper); }
+
+  .feature-header{
+    background:var(--white);
+    border-bottom:1px solid var(--border);
+    padding:20px 0;
+  }
+  .feature-header .container{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .back-link{ font-family:var(--font-body); font-weight:600; font-size:0.9rem; color:var(--ink-soft); }
+  .back-link:hover{ color:var(--coral); }
+
+  .analytics-page{ padding:48px 0 80px; }
+
+  .analytics-intro{ margin-bottom:28px; max-width:640px; }
+  .analytics-intro .eyebrow{
+    font-family:var(--font-mono);
+    font-size:0.75rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--coral);
+    margin-bottom:8px;
+  }
+  .analytics-intro h1{ font-family:var(--font-display); font-size:2.2rem; margin-bottom:10px; }
+  .analytics-intro p{ color:var(--ink-soft); line-height:1.6; }
+  .storage-note{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    margin-top:14px;
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    color:var(--ink-soft);
+    background:var(--white);
+    border:1px dashed var(--border);
+    padding:6px 12px;
+    border-radius:999px;
+  }
+
+  .empty-banner{
+    background:var(--white);
+    border:1px dashed var(--border);
+    border-radius:var(--radius-lg);
+    padding:20px 24px;
+    margin-bottom:28px;
+    color:var(--ink-soft);
+    font-size:0.9rem;
+  }
+  .empty-banner a{ color:var(--coral); font-weight:600; }
+
+  .overview-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    margin-bottom:36px;
+  }
+  .overview-card{
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-sm);
+    padding:20px;
+  }
+  .overview-card .num{
+    font-family:var(--font-mono);
+    font-size:1.8rem;
+    font-weight:600;
+    color:var(--coral);
+  }
+  .overview-card .lbl{ font-size:0.8rem; color:var(--ink-soft); margin-top:4px; }
+  .overview-card a{
+    display:block;
+    font-size:0.75rem;
+    color:var(--teal);
+    font-weight:600;
+    margin-top:10px;
+  }
+
+  .panels{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+  }
+  .panel{
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-sm);
+    padding:24px;
+  }
+  .panel h2{
+    font-family:var(--font-display);
+    font-size:1.1rem;
+    margin-bottom:18px;
+  }
+
+  .bar-row{ margin-bottom:14px; }
+  .bar-label{
+    display:flex;
+    justify-content:space-between;
+    font-size:0.82rem;
+    margin-bottom:6px;
+  }
+  .bar-track{
+    width:100%;
+    height:10px;
+    background:var(--paper);
+    border-radius:999px;
+    overflow:hidden;
+  }
+  .bar-fill{
+    height:100%;
+    border-radius:999px;
+    background:var(--coral);
+  }
+  .bar-fill.teal{ background:var(--teal); }
+  .bar-fill.highlighter{ background:var(--highlighter); }
+
+  .week-strip{
+    display:flex;
+    gap:8px;
+    align-items:flex-end;
+    height:120px;
+    margin-top:10px;
+  }
+  .week-col{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-end;
+    gap:6px;
+    height:100%;
+  }
+  .week-bar{
+    width:100%;
+    background:var(--coral);
+    border-radius:4px 4px 0 0;
+    min-height:4px;
+  }
+  .week-day{ font-family:var(--font-mono); font-size:0.65rem; color:var(--ink-soft); }
+
+  .panel-empty{
+    color:var(--ink-soft);
+    font-size:0.85rem;
+    text-align:center;
+    padding:20px;
+  }
+
+  @media (max-width: 900px){
+    .overview-grid{ grid-template-columns:repeat(2,1fr); }
+    .panels{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="feature-header">
+  <div class="container">
+    <a href="../index.html" class="logo">StudySarthi</a>
+    <a href="../index.html#features" class="back-link">&larr; Back to Features</a>
+  </div>
+</header>
+
+<main class="analytics-page">
+  <div class="container">
+
+    <div class="analytics-intro">
+      <p class="eyebrow">Feature · Progress Analytics</p>
+      <h1>Your real activity, in one view</h1>
+      <p>This page doesn't generate its own numbers — it reads directly from Smart Notes, Internship Tracker, Goal Planner, and Coding Practice, so what you see here is exactly what you've actually done.</p>
+      <span class="storage-note">💾 Reads from this browser's local data — no account sync yet</span>
+    </div>
+
+    <div id="empty-banner-slot"></div>
+
+    <div class="overview-grid" id="overview-grid"></div>
+
+    <div class="panels">
+      <div class="panel">
+        <h2>Internship Applications by Status</h2>
+        <div id="internship-panel"></div>
+      </div>
+      <div class="panel">
+        <h2>Notes by Subject</h2>
+        <div id="notes-panel"></div>
+      </div>
+      <div class="panel">
+        <h2>Coding Practice — Last 7 Days</h2>
+        <div id="coding-panel"></div>
+      </div>
+      <div class="panel">
+        <h2>Goal Completion Streak</h2>
+        <div id="goals-panel"></div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<script>
+  function safeLoad(key){
+    try{ return JSON.parse(localStorage.getItem(key)) || []; }catch(e){ return []; }
+  }
+
+  const notes = safeLoad('studysarthi_notes');
+  const internships = safeLoad('studysarthi_internships');
+  const goals = safeLoad('studysarthi_goals');
+  const goalHistory = safeLoad('studysarthi_goal_history');
+  const codingLog = safeLoad('studysarthi_coding_log');
+
+  const hasAnyData = notes.length || internships.length || goals.length || codingLog.length;
+
+  if(!hasAnyData){
+    document.getElementById('empty-banner-slot').innerHTML = `
+      <div class="empty-banner">
+        No activity yet across any tool. Start by adding a
+        <a href="notes.html">note</a>, an
+        <a href="internship-tracker.html">internship application</a>, a
+        <a href="goals.html">goal</a>, or a
+        <a href="coding-practice.html">coding problem</a> — this page updates automatically from real data.
+      </div>
+    `;
+  }
+
+  // ===== Overview cards =====
+  const codingStreak = calcStreak(codingLog.map(e => e.date));
+  const goalStreak = calcStreak(goalHistory);
+
+  document.getElementById('overview-grid').innerHTML = `
+    <div class="overview-card">
+      <div class="num">${notes.length}</div>
+      <div class="lbl">Notes Created</div>
+      <a href="notes.html">Open Smart Notes &rarr;</a>
+    </div>
+    <div class="overview-card">
+      <div class="num">${internships.length}</div>
+      <div class="lbl">Internships Tracked</div>
+      <a href="internship-tracker.html">Open Tracker &rarr;</a>
+    </div>
+    <div class="overview-card">
+      <div class="num">${goalStreak}</div>
+      <div class="lbl">Goal Streak (days)</div>
+      <a href="goals.html">Open Goal Planner &rarr;</a>
+    </div>
+    <div class="overview-card">
+      <div class="num">${codingLog.length}</div>
+      <div class="lbl">Problems Solved</div>
+      <a href="coding-practice.html">Open Coding Practice &rarr;</a>
+    </div>
+  `;
+
+  // ===== Internship status breakdown =====
+  const statusCounts = { applied:0, interview:0, offer:0, rejected:0 };
+  internships.forEach(a => { if(statusCounts[a.status] !== undefined) statusCounts[a.status]++; });
+  const statusMax = Math.max(1, ...Object.values(statusCounts));
+  const statusLabels = { applied:'Applied', interview:'Interview', offer:'Offer', rejected:'Rejected' };
+  const statusColors = { applied:'', interview:'highlighter', offer:'teal', rejected:'' };
+
+  document.getElementById('internship-panel').innerHTML = internships.length === 0
+    ? `<div class="panel-empty">No applications logged yet.</div>`
+    : Object.keys(statusCounts).map(k => `
+        <div class="bar-row">
+          <div class="bar-label"><span>${statusLabels[k]}</span><span>${statusCounts[k]}</span></div>
+          <div class="bar-track"><div class="bar-fill ${statusColors[k]}" style="width:${(statusCounts[k]/statusMax*100)}%"></div></div>
+        </div>
+      `).join('');
+
+  // ===== Notes by subject =====
+  const subjectCounts = {};
+  notes.forEach(n => { subjectCounts[n.subject] = (subjectCounts[n.subject] || 0) + 1; });
+  const subjectEntries = Object.entries(subjectCounts).sort((a,b) => b[1]-a[1]).slice(0,6);
+  const subjectMax = Math.max(1, ...subjectEntries.map(e => e[1]));
+
+  document.getElementById('notes-panel').innerHTML = notes.length === 0
+    ? `<div class="panel-empty">No notes yet.</div>`
+    : subjectEntries.map(([subject,count]) => `
+        <div class="bar-row">
+          <div class="bar-label"><span>${subject}</span><span>${count}</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:${(count/subjectMax*100)}%"></div></div>
+        </div>
+      `).join('');
+
+  // ===== Coding practice — last 7 days bar chart =====
+  const days = [];
+  for(let i = 6; i >= 0; i--){
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    const iso = d.toISOString().slice(0,10);
+    const count = codingLog.filter(e => e.date === iso).length;
+    days.push({ iso, count, label: d.toLocaleDateString(undefined, { weekday:'narrow' }) });
+  }
+  const dayMax = Math.max(1, ...days.map(d => d.count));
+
+  document.getElementById('coding-panel').innerHTML = codingLog.length === 0
+    ? `<div class="panel-empty">No problems logged yet.</div>`
+    : `<div class="week-strip">${days.map(d => `
+        <div class="week-col">
+          <span style="font-family:var(--font-mono); font-size:0.68rem; color:var(--ink-soft);">${d.count || ''}</span>
+          <div class="week-bar" style="height:${Math.max(4, (d.count/dayMax*90))}px"></div>
+          <span class="week-day">${d.label}</span>
+        </div>
+      `).join('')}</div>`;
+
+  // ===== Goals panel =====
+  const doneGoals = goals.filter(g => g.done).length;
+  document.getElementById('goals-panel').innerHTML = goals.length === 0
+    ? `<div class="panel-empty">No goals yet.</div>`
+    : `
+      <div class="bar-row">
+        <div class="bar-label"><span>Current streak</span><span>${goalStreak} day${goalStreak === 1 ? '' : 's'}</span></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label"><span>Completed today</span><span>${doneGoals} / ${goals.length}</span></div>
+        <div class="bar-track"><div class="bar-fill teal" style="width:${goals.length ? (doneGoals/goals.length*100) : 0}%"></div></div>
+      </div>
+    `;
+</script>
+
+</body>
+</html>

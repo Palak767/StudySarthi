@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>AI Study Assistant — StudySarthi</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/style.css">
+
+<style>
+  body{ background-color:var(--paper); }
+
+  .feature-header{
+    background:var(--white);
+    border-bottom:1px solid var(--border);
+    padding:20px 0;
+  }
+  .feature-header .container{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .back-link{ font-family:var(--font-body); font-weight:600; font-size:0.9rem; color:var(--ink-soft); }
+  .back-link:hover{ color:var(--coral); }
+
+  .assistant-page{ padding:48px 0 80px; }
+
+  .assistant-intro{ margin-bottom:24px; max-width:640px; }
+  .assistant-intro .eyebrow{
+    font-family:var(--font-mono);
+    font-size:0.75rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--coral);
+    margin-bottom:8px;
+  }
+  .assistant-intro h1{ font-family:var(--font-display); font-size:2.2rem; margin-bottom:10px; }
+  .assistant-intro p{ color:var(--ink-soft); line-height:1.6; }
+
+  .preview-notice{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    background:var(--white);
+    border:1px dashed var(--highlighter);
+    border-radius:var(--radius-lg);
+    padding:16px 20px;
+    margin-bottom:28px;
+    font-size:0.85rem;
+    color:var(--ink-soft);
+  }
+  .preview-notice strong{ color:var(--ink); }
+
+  .chat-shell{
+    max-width:680px;
+    margin:0 auto;
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-md);
+    display:flex;
+    flex-direction:column;
+    height:520px;
+  }
+  .chat-header{
+    padding:16px 20px;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .chat-header .dot{
+    width:8px; height:8px;
+    border-radius:50%;
+    background:var(--teal);
+  }
+  .chat-header span{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:0.95rem;
+  }
+
+  .chat-log{
+    flex:1;
+    overflow-y:auto;
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .msg{
+    max-width:80%;
+    padding:11px 15px;
+    border-radius:var(--radius-md);
+    font-size:0.88rem;
+    line-height:1.5;
+  }
+  .msg.bot{
+    background:var(--paper);
+    align-self:flex-start;
+    border-bottom-left-radius:2px;
+  }
+  .msg.user{
+    background:var(--coral);
+    color:var(--white);
+    align-self:flex-end;
+    border-bottom-right-radius:2px;
+  }
+
+  .quick-chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    padding:0 20px 14px;
+  }
+  .quick-chip{
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    padding:6px 12px;
+    border-radius:999px;
+    border:1px solid var(--border);
+    background:var(--white);
+    color:var(--ink-soft);
+    cursor:pointer;
+  }
+  .quick-chip:hover{ border-color:var(--coral); color:var(--coral); }
+
+  .chat-input-row{
+    display:flex;
+    gap:10px;
+    padding:16px 20px;
+    border-top:1px solid var(--border);
+  }
+  .chat-input-row input{
+    flex:1;
+    font-family:var(--font-body);
+    font-size:0.9rem;
+    padding:11px 14px;
+    border:1px solid var(--border);
+    border-radius:var(--radius-sm);
+    background:var(--paper);
+    outline:none;
+  }
+  .chat-input-row input:focus{
+    border-color:var(--coral);
+    box-shadow:0 0 0 3px rgba(255,111,89,0.15);
+  }
+  .chat-input-row button{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:0.88rem;
+    color:var(--white);
+    background:var(--coral);
+    border:none;
+    border-radius:var(--radius-sm);
+    padding:0 20px;
+    cursor:pointer;
+  }
+</style>
+</head>
+<body>
+
+<header class="feature-header">
+  <div class="container">
+    <a href="../index.html" class="logo">StudySarthi</a>
+    <a href="../index.html#features" class="back-link">&larr; Back to Features</a>
+  </div>
+</header>
+
+<main class="assistant-page">
+  <div class="container">
+
+    <div class="assistant-intro">
+      <p class="eyebrow">Feature · AI Study Assistant</p>
+      <h1>A first look at your study companion</h1>
+      <p>Ask for study tips, request a quiz format, or just get a nudge when you're stuck.</p>
+    </div>
+
+    <div class="preview-notice">
+      ⚠️ <span><strong>This is a rule-based preview, not a real AI model.</strong> It matches keywords to a small set of canned responses so you can see the intended experience. A genuine LLM-powered version is planned for a future release.</span>
+    </div>
+
+    <div class="chat-shell">
+      <div class="chat-header">
+        <span class="dot"></span>
+        <span>Study Assistant (Preview)</span>
+      </div>
+      <div class="chat-log" id="chat-log"></div>
+      <div class="quick-chips">
+        <span class="quick-chip" data-msg="Give me study tips">Study tips</span>
+        <span class="quick-chip" data-msg="Explain photosynthesis">Explain a topic</span>
+        <span class="quick-chip" data-msg="Quiz me on JavaScript">Quiz me</span>
+        <span class="quick-chip" data-msg="I'm feeling unmotivated">Motivation</span>
+      </div>
+      <form class="chat-input-row" id="chat-form">
+        <input type="text" id="chat-input" placeholder="Type a message..." autocomplete="off">
+        <button type="submit">Send</button>
+      </form>
+    </div>
+
+  </div>
+</main>
+
+<script>
+  const log = document.getElementById('chat-log');
+  const form = document.getElementById('chat-form');
+  const input = document.getElementById('chat-input');
+
+  function addMsg(text, who){
+    const div = document.createElement('div');
+    div.className = 'msg ' + who;
+    div.textContent = text;
+    log.appendChild(div);
+    log.scrollTop = log.scrollHeight;
+  }
+
+  // Rule-based responses — keyword matched, not a real language model.
+  const RULES = [
+    { keywords:['quiz'], respond: (msg) => {
+        const topicMatch = msg.match(/quiz me on (.+)/i);
+        const topic = topicMatch ? topicMatch[1].replace(/[?.!]+$/,'') : 'that topic';
+        return `Here's a mini quiz format for ${topic}: try writing 3 questions you think could be asked, answer them from memory, then check your notes. This "self-testing" approach works better than re-reading for retention.`;
+      }
+    },
+    { keywords:['explain'], respond: (msg) => {
+        const topicMatch = msg.match(/explain (.+)/i);
+        const topic = topicMatch ? topicMatch[1].replace(/[?.!]+$/,'') : 'that concept';
+        return `For ${topic}, try the Feynman method: explain it out loud in the simplest words you can, as if teaching a beginner. Wherever you get stuck or use jargon, that's exactly what to go re-read.`;
+      }
+    },
+    { keywords:['study tip','tips','how to study'], respond: () =>
+        "A few that actually hold up: study in 25-minute focused blocks with short breaks, test yourself instead of re-reading, and study a little every day instead of cramming. Pick one and try it this week."
+    },
+    { keywords:['unmotivated','motivation','tired','give up','stuck'], respond: () =>
+        "That's normal — motivation dips for everyone. Try committing to just 10 minutes on one small task. Once you start, momentum usually carries you further than you expect."
+    },
+    { keywords:['streak'], respond: () =>
+        "Streaks in StudySarthi come from your actual activity in Goal Planner and Coding Practice — check those pages to see your real numbers, not something I can invent here."
+    },
+    { keywords:['hello','hi','hey'], respond: () =>
+        "Hey! Ask me for study tips, say \"explain [topic]\", or \"quiz me on [topic]\" to see how this works."
+    }
+  ];
+
+  const FALLBACK = "I'm just a keyword-matching preview right now, so I don't have a specific answer for that. Try asking for \"study tips\", \"explain [a topic]\", or \"quiz me on [a topic]\".";
+
+  function getResponse(userMsg){
+    const lower = userMsg.toLowerCase();
+    for(const rule of RULES){
+      if(rule.keywords.some(k => lower.includes(k))){
+        return rule.respond(userMsg);
+      }
+    }
+    return FALLBACK;
+  }
+
+  function handleSend(msg){
+    if(!msg.trim()) return;
+    addMsg(msg, 'user');
+    setTimeout(() => {
+      addMsg(getResponse(msg), 'bot');
+    }, 350);
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const msg = input.value;
+    input.value = '';
+    handleSend(msg);
+  });
+
+  document.querySelectorAll('.quick-chip').forEach(chip => {
+    chip.addEventListener('click', () => handleSend(chip.dataset.msg));
+  });
+
+  // Opening message
+  addMsg("Hi! I'm a preview of the Study Assistant — try one of the suggestions below, or ask me something.", 'bot');
+</script>
+
+</body>
+</html>

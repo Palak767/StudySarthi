@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Internship Tracker — StudySarthi</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/style.css">
+
+<style>
+  body{ background-color:var(--paper); }
+
+  .feature-header{
+    background:var(--white);
+    border-bottom:1px solid var(--border);
+    padding:20px 0;
+  }
+  .feature-header .container{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .back-link{
+    font-family:var(--font-body);
+    font-weight:600;
+    font-size:0.9rem;
+    color:var(--ink-soft);
+  }
+  .back-link:hover{ color:var(--coral); }
+
+  .tracker-page{ padding:48px 0 80px; }
+
+  .tracker-intro{ margin-bottom:36px; max-width:640px; }
+  .tracker-intro .eyebrow{
+    font-family:var(--font-mono);
+    font-size:0.75rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--coral);
+    margin-bottom:8px;
+  }
+  .tracker-intro h1{
+    font-family:var(--font-display);
+    font-size:2.2rem;
+    margin-bottom:10px;
+  }
+  .tracker-intro p{ color:var(--ink-soft); line-height:1.6; }
+  .storage-note{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    margin-top:14px;
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    color:var(--ink-soft);
+    background:var(--white);
+    border:1px dashed var(--border);
+    padding:6px 12px;
+    border-radius:999px;
+  }
+
+  .tracker-layout{
+    display:grid;
+    grid-template-columns:340px 1fr;
+    gap:28px;
+    align-items:start;
+  }
+
+  .composer{
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-sm);
+    padding:22px;
+    position:sticky;
+    top:24px;
+  }
+  .composer h2{ font-family:var(--font-display); font-size:1.1rem; margin-bottom:16px; }
+  .field{ display:flex; flex-direction:column; gap:6px; margin-bottom:14px; }
+  .field label{ font-size:0.78rem; font-weight:600; color:var(--ink-soft); }
+  .field input, .field select, .field textarea{
+    font-family:var(--font-body);
+    font-size:0.9rem;
+    padding:10px 12px;
+    border:1px solid var(--border);
+    border-radius:var(--radius-sm);
+    background:var(--paper);
+    color:var(--ink);
+    outline:none;
+    resize:vertical;
+  }
+  .field textarea{ min-height:70px; line-height:1.5; }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    border-color:var(--coral);
+    box-shadow:0 0 0 3px rgba(255,111,89,0.15);
+  }
+  .row2{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .save-btn{
+    width:100%;
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:0.9rem;
+    color:var(--white);
+    background:var(--coral);
+    border:none;
+    border-radius:var(--radius-sm);
+    padding:12px 0;
+    cursor:pointer;
+    transition:transform 0.12s;
+  }
+  .save-btn:hover{ transform:translateY(-1px); }
+
+  .tracker-main-top{
+    display:flex;
+    gap:12px;
+    margin-bottom:18px;
+    flex-wrap:wrap;
+  }
+  .search-input{
+    flex:1;
+    min-width:180px;
+    font-family:var(--font-body);
+    font-size:0.9rem;
+    padding:10px 14px;
+    border:1px solid var(--border);
+    border-radius:var(--radius-sm);
+    background:var(--white);
+    outline:none;
+  }
+  .filter-select{
+    font-family:var(--font-body);
+    font-size:0.9rem;
+    padding:10px 12px;
+    border:1px solid var(--border);
+    border-radius:var(--radius-sm);
+    background:var(--white);
+  }
+
+  .stat-strip{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    margin-bottom:20px;
+  }
+  .stat-pill{
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:var(--radius-md);
+    padding:14px;
+    text-align:center;
+  }
+  .stat-pill .num{
+    font-family:var(--font-mono);
+    font-size:1.4rem;
+    font-weight:600;
+    color:var(--coral);
+  }
+  .stat-pill .lbl{
+    font-size:0.72rem;
+    color:var(--ink-soft);
+  }
+
+  .app-list{ display:flex; flex-direction:column; gap:12px; }
+  .app-card{
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:var(--radius-md);
+    box-shadow:var(--shadow-sm);
+    padding:16px 18px;
+    display:flex;
+    align-items:center;
+    gap:16px;
+  }
+  .app-card.overdue{ border-left:4px solid var(--coral); }
+  .app-main{ flex:1; min-width:0; }
+  .app-top{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .app-company{ font-family:var(--font-display); font-weight:600; font-size:1rem; }
+  .app-role{ color:var(--ink-soft); font-size:0.85rem; }
+  .status-tag{
+    font-family:var(--font-mono);
+    font-size:0.68rem;
+    padding:4px 10px;
+    border-radius:999px;
+    white-space:nowrap;
+  }
+  .status-applied{ background:rgba(90,107,140,.12); color:var(--ink-soft); }
+  .status-interview{ background:rgba(255,210,63,.3); color:var(--ink); }
+  .status-offer{ background:rgba(46,196,182,.15); color:var(--teal); }
+  .status-rejected{ background:rgba(255,111,89,.12); color:var(--coral); }
+  .app-notes{ font-size:0.8rem; color:var(--ink-soft); margin-top:4px; }
+  .app-dates{
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    color:var(--ink-soft);
+    text-align:right;
+    white-space:nowrap;
+  }
+  .app-dates .deadline-label{ display:block; margin-top:2px; }
+  .app-dates .overdue-flag{ color:var(--coral); font-weight:600; }
+  .app-actions{ display:flex; flex-direction:column; gap:6px; }
+  .app-actions button{
+    background:none;
+    border:none;
+    cursor:pointer;
+    font-family:var(--font-body);
+    font-size:0.78rem;
+    font-weight:600;
+    color:var(--ink-soft);
+  }
+  .app-actions button.edit-btn:hover{ color:var(--teal); }
+  .app-actions button.delete-btn:hover{ color:var(--coral); }
+
+  .empty-state{
+    text-align:center;
+    padding:60px 20px;
+    color:var(--ink-soft);
+    border:1px dashed var(--border);
+    border-radius:var(--radius-lg);
+    background:var(--white);
+  }
+
+  @media (max-width: 800px){
+    .tracker-layout{ grid-template-columns:1fr; }
+    .composer{ position:static; }
+    .stat-strip{ grid-template-columns:repeat(2,1fr); }
+    .app-card{ flex-wrap:wrap; }
+  }
+</style>
+</head>
+<body>
+
+<header class="feature-header">
+  <div class="container">
+    <a href="../index.html" class="logo">StudySarthi</a>
+    <a href="../index.html#features" class="back-link">&larr; Back to Features</a>
+  </div>
+</header>
+
+<main class="tracker-page">
+  <div class="container">
+
+    <div class="tracker-intro">
+      <p class="eyebrow">Feature · Internship Tracker</p>
+      <h1>Never lose track of an application again</h1>
+      <p>Log every internship you apply to, follow its status, and see what's coming up next — sorted by deadline so nothing slips through.</p>
+      <span class="storage-note">💾 Saved to this browser only — no account sync yet</span>
+    </div>
+
+    <div class="stat-strip" id="stat-strip"></div>
+
+    <div class="tracker-layout">
+
+      <div class="composer">
+        <h2 id="composer-title">New Application</h2>
+        <form id="app-form">
+          <input type="hidden" id="edit-id" value="">
+          <div class="field">
+            <label for="company">Company</label>
+            <input id="company" type="text" placeholder="e.g. Razorpay" required>
+          </div>
+          <div class="field">
+            <label for="role">Role</label>
+            <input id="role" type="text" placeholder="e.g. Frontend Intern" required>
+          </div>
+          <div class="field">
+            <label for="status">Status</label>
+            <select id="status" required>
+              <option value="applied">Applied</option>
+              <option value="interview">Interview</option>
+              <option value="offer">Offer</option>
+              <option value="rejected">Rejected</option>
+            </select>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="app-date">Applied on</label>
+              <input id="app-date" type="date" required>
+            </div>
+            <div class="field">
+              <label for="deadline-date">Next deadline</label>
+              <input id="deadline-date" type="date">
+            </div>
+          </div>
+          <div class="field">
+            <label for="notes">Notes</label>
+            <textarea id="notes" placeholder="Interview round, contact, referral, etc."></textarea>
+          </div>
+          <button type="submit" class="save-btn" id="save-btn">Add Application</button>
+        </form>
+      </div>
+
+      <div class="tracker-main">
+        <div class="tracker-main-top">
+          <input type="text" class="search-input" id="search-input" placeholder="Search company or role...">
+          <select class="filter-select" id="filter-select">
+            <option value="">All Statuses</option>
+            <option value="applied">Applied</option>
+            <option value="interview">Interview</option>
+            <option value="offer">Offer</option>
+            <option value="rejected">Rejected</option>
+          </select>
+        </div>
+        <div class="app-list" id="app-list"></div>
+      </div>
+
+    </div>
+
+  </div>
+</main>
+
+<script>
+  const STORAGE_KEY = 'studysarthi_internships';
+
+  function loadApps(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : [];
+    }catch(e){ return []; }
+  }
+  function saveApps(apps){ localStorage.setItem(STORAGE_KEY, JSON.stringify(apps)); }
+
+  let apps = loadApps();
+
+  const form = document.getElementById('app-form');
+  const list = document.getElementById('app-list');
+  const statStrip = document.getElementById('stat-strip');
+  const searchInput = document.getElementById('search-input');
+  const filterSelect = document.getElementById('filter-select');
+  const composerTitle = document.getElementById('composer-title');
+  const saveBtn = document.getElementById('save-btn');
+  const editIdField = document.getElementById('edit-id');
+
+  const STATUS_LABELS = { applied:'Applied', interview:'Interview', offer:'Offer', rejected:'Rejected' };
+
+  function escapeHtml(str){
+    const div = document.createElement('div');
+    div.textContent = str || '';
+    return div.innerHTML;
+  }
+
+  function formatDate(iso){
+    if(!iso) return '—';
+    const d = new Date(iso + 'T00:00:00');
+    return d.toLocaleDateString(undefined, { month:'short', day:'numeric' });
+  }
+
+  function isOverdue(app){
+    if(!app.deadline || app.status === 'offer' || app.status === 'rejected') return false;
+    const today = new Date(); today.setHours(0,0,0,0);
+    const d = new Date(app.deadline + 'T00:00:00');
+    return d < today;
+  }
+
+  function renderStats(){
+    const total = apps.length;
+    const interviews = apps.filter(a => a.status === 'interview').length;
+    const offers = apps.filter(a => a.status === 'offer').length;
+    const overdue = apps.filter(isOverdue).length;
+
+    statStrip.innerHTML = `
+      <div class="stat-pill"><div class="num">${total}</div><div class="lbl">Total Applications</div></div>
+      <div class="stat-pill"><div class="num">${interviews}</div><div class="lbl">In Interview</div></div>
+      <div class="stat-pill"><div class="num">${offers}</div><div class="lbl">Offers</div></div>
+      <div class="stat-pill"><div class="num">${overdue}</div><div class="lbl">Overdue</div></div>
+    `;
+  }
+
+  function render(){
+    const query = searchInput.value.trim().toLowerCase();
+    const statusFilter = filterSelect.value;
+
+    const filtered = apps
+      .filter(a => !statusFilter || a.status === statusFilter)
+      .filter(a => !query || (a.company + ' ' + a.role).toLowerCase().includes(query))
+      .sort((a,b) => {
+        if(!a.deadline && !b.deadline) return 0;
+        if(!a.deadline) return 1;
+        if(!b.deadline) return -1;
+        return new Date(a.deadline) - new Date(b.deadline);
+      });
+
+    if(filtered.length === 0){
+      list.innerHTML = `<div class="empty-state">
+        ${apps.length === 0 ? "No applications logged yet. Add your first one on the left." : "No applications match your search/filter."}
+      </div>`;
+      renderStats();
+      return;
+    }
+
+    list.innerHTML = filtered.map(app => {
+      const overdue = isOverdue(app);
+      return `
+        <div class="app-card ${overdue ? 'overdue' : ''}">
+          <div class="app-main">
+            <div class="app-top">
+              <span class="app-company">${escapeHtml(app.company)}</span>
+              <span class="status-tag status-${app.status}">${STATUS_LABELS[app.status]}</span>
+            </div>
+            <div class="app-role">${escapeHtml(app.role)}</div>
+            ${app.notes ? `<div class="app-notes">${escapeHtml(app.notes)}</div>` : ''}
+          </div>
+          <div class="app-dates">
+            <span>Applied ${formatDate(app.appliedDate)}</span>
+            <span class="deadline-label ${overdue ? 'overdue-flag' : ''}">
+              ${overdue ? 'Overdue — ' : ''}${app.deadline ? 'Due ' + formatDate(app.deadline) : 'No deadline'}
+            </span>
+          </div>
+          <div class="app-actions">
+            <button class="edit-btn" onclick="editApp('${app.id}')">Edit</button>
+            <button class="delete-btn" onclick="deleteApp('${app.id}')">Delete</button>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    renderStats();
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const company = document.getElementById('company').value.trim();
+    const role = document.getElementById('role').value.trim();
+    const status = document.getElementById('status').value;
+    const appliedDate = document.getElementById('app-date').value;
+    const deadline = document.getElementById('deadline-date').value;
+    const notes = document.getElementById('notes').value.trim();
+    const editId = editIdField.value;
+
+    if(editId){
+      const app = apps.find(a => a.id === editId);
+      if(app){
+        Object.assign(app, { company, role, status, appliedDate, deadline, notes });
+      }
+    } else {
+      apps.push({
+        id: 'app_' + Date.now() + '_' + Math.random().toString(36).slice(2,7),
+        company, role, status, appliedDate, deadline, notes
+      });
+    }
+
+    saveApps(apps);
+    resetForm();
+    render();
+  });
+
+  function resetForm(){
+    form.reset();
+    editIdField.value = '';
+    composerTitle.textContent = 'New Application';
+    saveBtn.textContent = 'Add Application';
+    document.getElementById('app-date').value = new Date().toISOString().slice(0,10);
+  }
+
+  window.editApp = function(id){
+    const app = apps.find(a => a.id === id);
+    if(!app) return;
+    document.getElementById('company').value = app.company;
+    document.getElementById('role').value = app.role;
+    document.getElementById('status').value = app.status;
+    document.getElementById('app-date').value = app.appliedDate || '';
+    document.getElementById('deadline-date').value = app.deadline || '';
+    document.getElementById('notes').value = app.notes || '';
+    editIdField.value = app.id;
+    composerTitle.textContent = 'Edit Application';
+    saveBtn.textContent = 'Update Application';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  window.deleteApp = function(id){
+    if(!confirm("Delete this application? This can't be undone.")) return;
+    apps = apps.filter(a => a.id !== id);
+    saveApps(apps);
+    render();
+  };
+
+  searchInput.addEventListener('input', render);
+  filterSelect.addEventListener('change', render);
+
+  document.getElementById('app-date').value = new Date().toISOString().slice(0,10);
+  render();
+</script>
+
+</body>
+</html>

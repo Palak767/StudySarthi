@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Coding Practice — StudySarthi</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/streak-utils.js"></script>
+
+<style>
+  body{ background-color:var(--paper); }
+
+  .feature-header{
+    background:var(--white);
+    border-bottom:1px solid var(--border);
+    padding:20px 0;
+  }
+  .feature-header .container{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .back-link{
+    font-family:var(--font-body);
+    font-weight:600;
+    font-size:0.9rem;
+    color:var(--ink-soft);
+  }
+  .back-link:hover{ color:var(--coral); }
+
+  .practice-page{ padding:48px 0 80px; }
+
+  .practice-intro{ margin-bottom:28px; max-width:640px; }
+  .practice-intro .eyebrow{
+    font-family:var(--font-mono);
+    font-size:0.75rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--coral);
+    margin-bottom:8px;
+  }
+  .practice-intro h1{ font-family:var(--font-display); font-size:2.2rem; margin-bottom:10px; }
+  .practice-intro p{ color:var(--ink-soft); line-height:1.6; }
+  .storage-note{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    margin-top:14px;
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    color:var(--ink-soft);
+    background:var(--white);
+    border:1px dashed var(--border);
+    padding:6px 12px;
+    border-radius:999px;
+  }
+
+  .stat-strip{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-bottom:28px;
+  }
+  .stat-pill{
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:var(--radius-md);
+    padding:16px;
+    text-align:center;
+  }
+  .stat-pill .num{
+    font-family:var(--font-mono);
+    font-size:1.6rem;
+    font-weight:600;
+    color:var(--coral);
+  }
+  .stat-pill .lbl{ font-size:0.75rem; color:var(--ink-soft); margin-top:2px; }
+
+  .practice-layout{
+    display:grid;
+    grid-template-columns:320px 1fr;
+    gap:28px;
+    align-items:start;
+  }
+
+  .composer{
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-sm);
+    padding:22px;
+    position:sticky;
+    top:24px;
+  }
+  .composer h2{ font-family:var(--font-display); font-size:1.1rem; margin-bottom:16px; }
+  .field{ display:flex; flex-direction:column; gap:6px; margin-bottom:14px; }
+  .field label{ font-size:0.78rem; font-weight:600; color:var(--ink-soft); }
+  .field input, .field select{
+    font-family:var(--font-body);
+    font-size:0.9rem;
+    padding:10px 12px;
+    border:1px solid var(--border);
+    border-radius:var(--radius-sm);
+    background:var(--paper);
+    color:var(--ink);
+    outline:none;
+  }
+  .field input:focus, .field select:focus{
+    border-color:var(--coral);
+    box-shadow:0 0 0 3px rgba(255,111,89,0.15);
+  }
+  .save-btn{
+    width:100%;
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:0.9rem;
+    color:var(--white);
+    background:var(--coral);
+    border:none;
+    border-radius:var(--radius-sm);
+    padding:12px 0;
+    cursor:pointer;
+    transition:transform 0.12s;
+  }
+  .save-btn:hover{ transform:translateY(-1px); }
+
+  .log-row{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:var(--radius-md);
+    box-shadow:var(--shadow-sm);
+    padding:14px 16px;
+    margin-bottom:10px;
+  }
+  .log-main{ flex:1; }
+  .log-problem{ font-size:0.92rem; font-weight:600; }
+  .log-meta{ font-size:0.78rem; color:var(--ink-soft); margin-top:2px; }
+  .diff-tag{
+    font-family:var(--font-mono);
+    font-size:0.65rem;
+    padding:3px 9px;
+    border-radius:999px;
+    white-space:nowrap;
+  }
+  .diff-easy{ background:rgba(46,196,182,.15); color:var(--teal); }
+  .diff-medium{ background:rgba(255,210,63,.3); color:var(--ink); }
+  .diff-hard{ background:rgba(255,111,89,.12); color:var(--coral); }
+  .log-date{
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    color:var(--ink-soft);
+    white-space:nowrap;
+  }
+  .log-delete{
+    background:none; border:none; cursor:pointer;
+    color:var(--ink-soft); font-size:0.78rem; font-weight:600;
+  }
+  .log-delete:hover{ color:var(--coral); }
+
+  .empty-state{
+    text-align:center;
+    padding:40px 20px;
+    color:var(--ink-soft);
+    border:1px dashed var(--border);
+    border-radius:var(--radius-lg);
+    background:var(--white);
+  }
+
+  @media (max-width: 800px){
+    .practice-layout{ grid-template-columns:1fr; }
+    .composer{ position:static; }
+    .stat-strip{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="feature-header">
+  <div class="container">
+    <a href="../index.html" class="logo">StudySarthi</a>
+    <a href="../index.html#features" class="back-link">&larr; Back to Features</a>
+  </div>
+</header>
+
+<main class="practice-page">
+  <div class="container">
+
+    <div class="practice-intro">
+      <p class="eyebrow">Feature · Coding Practice</p>
+      <h1>Build a habit, one problem at a time</h1>
+      <p>Log every problem you solve — platform, difficulty, and date — and watch your streak and weekly count grow from real activity.</p>
+      <span class="storage-note">💾 Saved to this browser only — no account sync yet</span>
+    </div>
+
+    <div class="stat-strip" id="stat-strip"></div>
+
+    <div class="practice-layout">
+
+      <div class="composer">
+        <h2>Log a Problem</h2>
+        <form id="log-form">
+          <div class="field">
+            <label for="problem-name">Problem name</label>
+            <input id="problem-name" type="text" placeholder="e.g. Two Sum" required>
+          </div>
+          <div class="field">
+            <label for="platform">Platform</label>
+            <select id="platform">
+              <option>LeetCode</option>
+              <option>HackerRank</option>
+              <option>Codeforces</option>
+              <option>GeeksforGeeks</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="difficulty">Difficulty</label>
+            <select id="difficulty">
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="log-date">Date solved</label>
+            <input id="log-date" type="date" required>
+          </div>
+          <button type="submit" class="save-btn">Add to Log</button>
+        </form>
+      </div>
+
+      <div class="practice-main">
+        <div id="log-list"></div>
+      </div>
+
+    </div>
+
+  </div>
+</main>
+
+<script>
+  const KEY = 'studysarthi_coding_log';
+
+  function loadLog(){
+    try{ return JSON.parse(localStorage.getItem(KEY)) || []; }catch(e){ return []; }
+  }
+  function saveLog(l){ localStorage.setItem(KEY, JSON.stringify(l)); }
+
+  // todayStr(), calcStreak(), and calcRecentCount() come from js/streak-utils.js
+
+  let log = loadLog();
+
+  const form = document.getElementById('log-form');
+  const list = document.getElementById('log-list');
+  const statStrip = document.getElementById('stat-strip');
+
+  const DIFF_LABELS = { easy:'Easy', medium:'Medium', hard:'Hard' };
+
+  function escapeHtml(str){
+    const div = document.createElement('div');
+    div.textContent = str || '';
+    return div.innerHTML;
+  }
+
+  function formatDate(iso){
+    const d = new Date(iso + 'T00:00:00');
+    return d.toLocaleDateString(undefined, { month:'short', day:'numeric', year:'numeric' });
+  }
+
+  function renderStats(){
+    const streak = calcStreak(log.map(e => e.date));
+    const weekly = calcRecentCount(log, 7);
+    const total = log.length;
+    statStrip.innerHTML = `
+      <div class="stat-pill"><div class="num">${streak}</div><div class="lbl">Day Streak</div></div>
+      <div class="stat-pill"><div class="num">${weekly}</div><div class="lbl">Solved This Week</div></div>
+      <div class="stat-pill"><div class="num">${total}</div><div class="lbl">Total Solved</div></div>
+    `;
+  }
+
+  function render(){
+    if(log.length === 0){
+      list.innerHTML = `<div class="empty-state">No problems logged yet. Add your first one on the left.</div>`;
+      renderStats();
+      return;
+    }
+
+    const sorted = [...log].sort((a,b) => new Date(b.date) - new Date(a.date));
+
+    list.innerHTML = sorted.map(e => `
+      <div class="log-row">
+        <div class="log-main">
+          <div class="log-problem">${escapeHtml(e.problem)}</div>
+          <div class="log-meta">${escapeHtml(e.platform)}</div>
+        </div>
+        <span class="diff-tag diff-${e.difficulty}">${DIFF_LABELS[e.difficulty]}</span>
+        <span class="log-date">${formatDate(e.date)}</span>
+        <button class="log-delete" onclick="deleteEntry('${e.id}')">Delete</button>
+      </div>
+    `).join('');
+
+    renderStats();
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const problem = document.getElementById('problem-name').value.trim();
+    const platform = document.getElementById('platform').value;
+    const difficulty = document.getElementById('difficulty').value;
+    const date = document.getElementById('log-date').value;
+
+    log.push({
+      id: 'log_' + Date.now() + '_' + Math.random().toString(36).slice(2,7),
+      problem, platform, difficulty, date
+    });
+    saveLog(log);
+    form.reset();
+    document.getElementById('log-date').value = todayStr();
+    render();
+  });
+
+  window.deleteEntry = function(id){
+    if(!confirm("Delete this entry?")) return;
+    log = log.filter(e => e.id !== id);
+    saveLog(log);
+    render();
+  };
+
+  document.getElementById('log-date').value = todayStr();
+  render();
+</script>
+
+</body>
+</html>

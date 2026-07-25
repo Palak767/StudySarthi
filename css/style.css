@@ -274,6 +274,8 @@ nav .container{
     border:1px solid var(--border);
     border-radius:var(--radius-md);
     box-shadow:var(--shadow-sm);
+    padding:0 0 24px;
+    overflow:hidden;
     transition:transform .15s ease, box-shadow .15s ease;
 }
 .feature-card:hover{
@@ -282,13 +284,16 @@ nav .container{
 }
 .feature-icon{
     background:rgba(255,111,89,.12);
+    padding:14px 24px;
     border-radius:var(--radius-sm);
 }
 .feature-card h3{
+    margin:18px 24px 10px;
     margin-bottom:16px;
     font-size:1.3rem;
 }
 .feature-card p{
+    margin:0 24px;
     color:var(--ink-soft);
     line-height:1.7;
 }
@@ -355,6 +360,7 @@ a.feature-card{
     border:1px solid var(--border);
     border-radius:var(--radius-md);
     box-shadow:var(--shadow-sm);
+    padding:24px 20px;
 }
 .stat-card:hover{
     transform:translate(-3px,-3px) scale(1);
@@ -363,10 +369,13 @@ a.feature-card{
 .stat-card h3{
     font-family:var(--font-mono);
     color:var(--coral);
+    margin-bottom:10px;
 }
 .stat-card p{
     color:var(--ink-soft);
     font-size:1rem;
+    margin:0;
+    padding:0 8px;
 }
 /*FAQ*/
 .faq{
@@ -447,14 +456,25 @@ a.feature-card{
     grid-template-columns:2fr 1fr;
     gap:50px;
     margin-top:50px;
+    padding:0 4px;
 }
 .contact-form form{
+    padding:8px 4px;
     display:flex;
     flex-direction:column;
     gap:20px;
 }
+.contact-form .btn-primary{
+    margin-top:8px;
+    padding:14px 32px;
+}
+.contact-form button[type="submit"]{
+    padding:14px 32px;
+    margin-top:6px;
+}
 .contact-form input,
 .contact-form textarea{
+    padding:14px 16px;
     border:1px solid var(--border);
     border-radius:var(--radius-sm);
     font-family:var(--font-body);
@@ -466,6 +486,7 @@ a.feature-card{
     box-shadow:0 0 0 3px rgba(255,111,89,.15);
 }
 .contact-info{
+    padding:28px 30px;
     background:var(--white);
     border:1px solid var(--border);
     box-shadow:var(--shadow-sm);
@@ -474,6 +495,7 @@ a.feature-card{
     margin-bottom:25px;
 }
 .info-box{
+    padding:0 2px;
     display:flex;
     align-items:center;
     gap:15px;
@@ -483,6 +505,9 @@ a.feature-card{
     font-size:1.5rem;
 }
 .info-box p{
+    margin:0;
+    padding-left:2px;
+    margin-left:2px;
     color:var(--ink-soft);
 }
 /* ==========================
