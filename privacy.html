@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Privacy Policy — StudySarthi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/responsive.css">
+<style>
+  body{ background-color:var(--paper); }
+  .page-header{ background:var(--white); border-bottom:1px solid var(--border); padding:20px 0; }
+  .page-header .container{ display:flex; align-items:center; justify-content:space-between; }
+  .back-link{ font-family:var(--font-body); font-weight:600; font-size:0.9rem; color:var(--ink-soft); }
+  .back-link:hover{ color:var(--coral); }
+
+  .legal-page{ padding:56px 0 90px; }
+  .legal-content{ max-width:720px; margin:0 auto; }
+  .eyebrow{
+    font-family:var(--font-mono); font-size:0.75rem; letter-spacing:0.06em;
+    text-transform:uppercase; color:var(--coral); margin-bottom:10px;
+  }
+  .legal-content h1{ font-family:var(--font-display); font-size:2.1rem; margin-bottom:8px; }
+  .updated{ font-size:0.8rem; color:var(--ink-soft); margin-bottom:30px; }
+  .legal-content h2{ font-family:var(--font-display); font-size:1.15rem; margin:30px 0 10px; }
+  .legal-content p{ color:var(--ink-soft); line-height:1.75; margin-bottom:14px; }
+  .legal-content ul{ color:var(--ink-soft); line-height:1.8; padding-left:20px; margin-bottom:14px; }
+
+  .storage-table{
+    width:100%; border-collapse:collapse; margin:16px 0 24px;
+    background:var(--white); border:1px solid var(--border); border-radius:var(--radius-md); overflow:hidden;
+  }
+  .storage-table th, .storage-table td{
+    text-align:left; padding:12px 14px; font-size:0.85rem; border-bottom:1px solid var(--border);
+  }
+  .storage-table th{ font-family:var(--font-display); background:var(--paper); }
+  .storage-table td{ color:var(--ink-soft); }
+  .storage-table tr:last-child td{ border-bottom:none; }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <div class="container">
+    <a href="index.html" class="logo">StudySarthi</a>
+    <a href="index.html" class="back-link">&larr; Back to Home</a>
+  </div>
+</header>
+
+<main class="legal-page">
+  <div class="container">
+    <div class="legal-content">
+      <p class="eyebrow">Legal</p>
+      <h1>Privacy Policy</h1>
+      <p class="updated">Last updated: July 2026</p>
+
+      <p>This policy explains, plainly, what data StudySarthi handles and where it goes. Short version: everything currently stays in your own browser — nothing is sent to a server, because there isn't one yet.</p>
+
+      <h2>What data is stored, and where</h2>
+      <p>The tools below use your browser's <code>localStorage</code>, which only your browser can read, and only stays on the device you're using:</p>
+      <table class="storage-table">
+        <tr><th>Tool</th><th>What's stored locally</th></tr>
+        <tr><td>Smart Notes</td><td>Note titles, subjects, and content</td></tr>
+        <tr><td>Internship Tracker</td><td>Company, role, status, dates, and notes you enter</td></tr>
+        <tr><td>Goal Planner</td><td>Goals and completion history</td></tr>
+        <tr><td>Coding Practice</td><td>Logged problems, platform, difficulty, and dates</td></tr>
+        <tr><td>Settings</td><td>Profile fields and preferences you fill in</td></tr>
+      </table>
+
+      <h2>What this means in practice</h2>
+      <ul>
+        <li>No data is transmitted to any server — there's no backend to receive it.</li>
+        <li>Data doesn't sync across devices or browsers.</li>
+        <li>Clearing your browser's site data, cache, or switching devices will erase it, since it isn't backed up anywhere else.</li>
+        <li>No cookies, analytics, or tracking scripts are currently used on this site.</li>
+      </ul>
+
+      <h2>The login/signup page</h2>
+      <p>The current login/signup flow is a static frontend preview — it doesn't send your name, email, or password anywhere, and there's no real account system behind it yet.</p>
+
+      <h2>When this will change</h2>
+      <p>Once real authentication and a backend (e.g. Firebase or Supabase) are added, some data will move to a real database so it can sync across your devices. This policy will be updated at that point to explain exactly what's collected, how it's secured, and how you can request deletion.</p>
+
+      <h2>Questions</h2>
+      <p>Reach out via the <a href="contact.html" style="color:var(--coral); font-weight:600;">Contact page</a> with any privacy questions.</p>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>

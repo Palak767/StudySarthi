@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Contact — StudySarthi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/responsive.css">
+<style>
+  body{ background-color:var(--paper); }
+  .page-header{ background:var(--white); border-bottom:1px solid var(--border); padding:20px 0; }
+  .page-header .container{ display:flex; align-items:center; justify-content:space-between; }
+  .back-link{ font-family:var(--font-body); font-weight:600; font-size:0.9rem; color:var(--ink-soft); }
+  .back-link:hover{ color:var(--coral); }
+
+  .contact-page{ padding:56px 0 90px; }
+  .contact-intro{ max-width:640px; margin:0 auto 36px; text-align:center; }
+  .eyebrow{
+    font-family:var(--font-mono); font-size:0.75rem; letter-spacing:0.06em;
+    text-transform:uppercase; color:var(--coral); margin-bottom:10px;
+  }
+  .contact-intro h1{ font-family:var(--font-display); font-size:2.1rem; margin-bottom:10px; }
+  .contact-intro p{ color:var(--ink-soft); line-height:1.6; }
+
+  .contact-layout{
+    display:grid; grid-template-columns:2fr 1fr; gap:30px;
+    max-width:960px; margin:0 auto;
+  }
+  .contact-form-card{
+    background:var(--white); border:1px solid var(--border); border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-sm); padding:30px;
+  }
+  .field{ display:flex; flex-direction:column; gap:6px; margin-bottom:16px; }
+  .field label{ font-size:0.82rem; font-weight:600; color:var(--ink-soft); }
+  .field input, .field textarea{
+    font-family:var(--font-body); font-size:0.9rem; padding:11px 13px;
+    border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--paper);
+    color:var(--ink); outline:none; resize:vertical;
+  }
+  .field textarea{ min-height:140px; line-height:1.5; }
+  .field input:focus, .field textarea:focus{
+    border-color:var(--coral); box-shadow:0 0 0 3px rgba(255,111,89,0.15);
+  }
+  .submit-btn{
+    font-family:var(--font-display); font-weight:600; font-size:0.92rem;
+    color:var(--white); background:var(--coral); border:none; border-radius:var(--radius-sm);
+    padding:13px 30px; cursor:pointer; transition:transform .12s;
+  }
+  .submit-btn:hover{ transform:translateY(-1px); }
+
+  .contact-info-card{
+    background:var(--white); border:1px solid var(--border); border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-sm); padding:28px;
+  }
+  .contact-info-card h3{ font-family:var(--font-display); margin-bottom:20px; }
+  .info-row{ display:flex; align-items:flex-start; gap:12px; margin-bottom:20px; }
+  .info-row p{ color:var(--ink-soft); font-size:0.9rem; line-height:1.5; }
+  .info-row a{ color:var(--ink); }
+
+  .confirm-msg{
+    display:none; color:var(--teal); font-weight:600; font-size:0.88rem; margin-top:12px;
+  }
+  .confirm-msg.show{ display:block; }
+  .note-line{
+    font-family:var(--font-mono); font-size:0.7rem; color:var(--ink-soft); margin-top:14px;
+  }
+
+  @media (max-width:800px){ .contact-layout{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <div class="container">
+    <a href="index.html" class="logo">StudySarthi</a>
+    <a href="index.html" class="back-link">&larr; Back to Home</a>
+  </div>
+</header>
+
+<main class="contact-page">
+  <div class="container">
+    <div class="contact-intro">
+      <p class="eyebrow">Contact</p>
+      <h1>Get in Touch</h1>
+      <p>Have questions or suggestions? We'd love to hear from you.</p>
+    </div>
+
+    <div class="contact-layout">
+      <div class="contact-form-card">
+        <form id="contact-form">
+          <div class="field">
+            <label for="c-name">Name</label>
+            <input id="c-name" type="text" placeholder="Your name" required>
+          </div>
+          <div class="field">
+            <label for="c-email">Email</label>
+            <input id="c-email" type="email" placeholder="you@example.com" required>
+          </div>
+          <div class="field">
+            <label for="c-message">Message</label>
+            <textarea id="c-message" placeholder="How can we help?" required></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+        <p class="confirm-msg" id="confirm-msg">✓ Message noted — we'll get back to you by email.</p>
+        <p class="note-line">This form doesn't have a live backend yet — submissions are logged locally in this demo.</p>
+      </div>
+
+      <div class="contact-info-card">
+        <h3>Contact Information</h3>
+        <div class="info-row">
+          <svg class="icon icon-accent" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
+          <p><a href="mailto:support@studysarthi.com">support@studysarthi.com</a></p>
+        </div>
+        <div class="info-row">
+          <svg class="icon" style="color:var(--teal)" viewBox="0 0 24 24"><path d="M3 5a2 2 0 0 1 2-2h3l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v3a2 2 0 0 1-2 2h-1C8.6 19 3 13.4 3 6z"/></svg>
+          <p>+91 XXXXX XXXXX</p>
+        </div>
+        <div class="info-row">
+          <svg class="icon" style="color:var(--coral)" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <p>Noida, Uttar Pradesh, India</p>
+        </div>
+        <div class="info-row">
+          <svg class="icon" style="color:var(--highlighter)" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <p>Monday – Friday | 9 AM – 6 PM</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  document.getElementById('contact-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    try{
+      const log = JSON.parse(localStorage.getItem('studysarthi_contact_submissions') || '[]');
+      log.push({
+        name: document.getElementById('c-name').value,
+        email: document.getElementById('c-email').value,
+        message: document.getElementById('c-message').value,
+        date: new Date().toISOString()
+      });
+      localStorage.setItem('studysarthi_contact_submissions', JSON.stringify(log));
+    }catch(err){}
+    document.getElementById('confirm-msg').classList.add('show');
+    e.target.reset();
+  });
+</script>
+
+</body>
+</html>

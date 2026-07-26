@@ -16,8 +16,8 @@
     color:var(--ink);
     background-color:var(--paper);
     background-image:
-      linear-gradient(var(--line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
     background-size: 28px 28px;
     background-position: -1px -1px;
     display:flex;
@@ -44,8 +44,8 @@
   }
 
   .card{
-    background:var(--paper-card);
-    border:1px solid var(--line);
+    background:var(--white);
+    border:1px solid var(--border);
     border-radius:6px;
     padding:38px 32px 32px;
     position:relative;
@@ -90,7 +90,7 @@
   .toggle{
     display:flex;
     background:var(--paper);
-    border:1px solid var(--line);
+    border:1px solid var(--border);
     border-radius:999px;
     padding:3px;
     margin-bottom:26px;
@@ -126,7 +126,7 @@
     font-family:'Inter', sans-serif;
     font-size:0.92rem;
     padding:11px 12px;
-    border:1px solid var(--line);
+    border:1px solid var(--border);
     border-radius:5px;
     background:var(--paper);
     color:var(--ink);
@@ -138,10 +138,22 @@
     box-shadow:0 0 0 3px rgba(255,111,89,0.15);
   }
 
-  .row2{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-
+  .row2{ 
+    display:grid;
+    grid-template-columns:1fr 1fr; 
+    gap:12px; 
+    min-width:0;
+  }
+  .row2 .field{
+    min-width:0;
+  }
+  .row2 .field input{
+    width:100%;
+    min-width:0;
+    box-sizing:border-box;
+  }
   fieldset{
-    border:1px dashed var(--line);
+    border:1px dashed var(--border);
     border-radius:6px;
     padding:12px 14px 14px;
     margin:0;
@@ -158,8 +170,8 @@
     font-size:0.72rem;
     padding:7px 12px;
     border-radius:999px;
-    border:1px solid var(--line);
-    background:var(--paper-card);
+    border:1px solid var(--border);
+    background:var(--white);
     cursor:pointer;
     user-select:none;
     color:var(--ink-soft);
@@ -327,10 +339,28 @@
     e.preventDefault();
     // No backend yet — this is a static frontend placeholder.
     // Real auth (e.g. Firebase/Supabase) gets wired in later.
+    sessionStorage.setItem('studysarthi_logged_in', 'true');  
     window.location.href = 'dashboard.html';
     return false;
   }
 </script>
-
+<script>
+  (function(){
+    const loggedIn = localStorage.getItem('studysarthi_logged_in') === 'true';
+    const target = loggedIn ? 'dashboard.html' : 'auth.html';
+    document.querySelectorAll('.js-get-started').forEach(btn => btn.setAttribute('href', target));
+  })();
+  // Default to Signup for first-timers, Login for returning visitors
+if(localStorage.getItem('studysarthi_has_account') === 'true'){
+  switchForm('login');
+} else {
+  switchForm('signup');
+}
+(function(){
+  const loggedInThisSession = sessionStorage.getItem('studysarthi_logged_in') === 'true';
+  const target = loggedInThisSession ? 'dashboard.html' : 'auth.html';
+  document.querySelectorAll('.js-get-started').forEach(btn => btn.setAttribute('href', target));
+})();
+</script>
 </body>
 </html>

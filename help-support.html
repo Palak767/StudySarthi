@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Help & Support — StudySarthi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/responsive.css">
+<style>
+  body{ background-color:var(--paper); }
+  .page-header{ background:var(--white); border-bottom:1px solid var(--border); padding:20px 0; }
+  .page-header .container{ display:flex; align-items:center; justify-content:space-between; }
+  .back-link{ font-family:var(--font-body); font-weight:600; font-size:0.9rem; color:var(--ink-soft); }
+  .back-link:hover{ color:var(--coral); }
+
+  .help-page{ padding:56px 0 90px; }
+  .help-intro{ max-width:640px; margin:0 auto 36px; text-align:center; }
+  .eyebrow{
+    font-family:var(--font-mono); font-size:0.75rem; letter-spacing:0.06em;
+    text-transform:uppercase; color:var(--coral); margin-bottom:10px;
+  }
+  .help-intro h1{ font-family:var(--font-display); font-size:2.1rem; margin-bottom:10px; }
+  .help-intro p{ color:var(--ink-soft); line-height:1.6; }
+
+  .help-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:20px;
+    max-width:960px; margin:0 auto 50px;
+  }
+  .help-card{
+    background:var(--white); border:1px solid var(--border); border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-sm); padding:24px; cursor:pointer; transition:transform .15s, box-shadow .15s;
+    text-align:left;
+  }
+  .help-card:hover{ transform:translate(-2px,-2px); box-shadow:8px 8px 0 rgba(27,42,74,.1); }
+  .help-card.active{ border-color:var(--coral); }
+  .help-card h3{ font-family:var(--font-display); font-size:1rem; margin:12px 0 6px; }
+  .help-card p{ color:var(--ink-soft); font-size:0.85rem; line-height:1.5; }
+
+  .form-section{
+    max-width:640px; margin:0 auto;
+    background:var(--white); border:1px solid var(--border); border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-sm); padding:32px;
+  }
+  .form-section h2{ font-family:var(--font-display); font-size:1.2rem; margin-bottom:6px; }
+  .form-section .sub{ color:var(--ink-soft); font-size:0.88rem; margin-bottom:22px; }
+
+  .field{ display:flex; flex-direction:column; gap:6px; margin-bottom:16px; }
+  .field label{ font-size:0.82rem; font-weight:600; color:var(--ink-soft); }
+  .field input, .field select, .field textarea{
+    font-family:var(--font-body); font-size:0.9rem; padding:11px 13px;
+    border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--paper);
+    color:var(--ink); outline:none; resize:vertical;
+  }
+  .field textarea{ min-height:110px; line-height:1.5; }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    border-color:var(--coral); box-shadow:0 0 0 3px rgba(255,111,89,0.15);
+  }
+  .submit-btn{
+    width:100%; font-family:var(--font-display); font-weight:600; font-size:0.92rem;
+    color:var(--white); background:var(--coral); border:none; border-radius:var(--radius-sm);
+    padding:13px 0; cursor:pointer; transition:transform .12s;
+  }
+  .submit-btn:hover{ transform:translateY(-1px); }
+
+  .confirm-msg{
+    display:none; text-align:center; color:var(--teal); font-weight:600; font-size:0.9rem;
+    margin-top:14px;
+  }
+  .confirm-msg.show{ display:block; }
+
+  .note-line{
+    font-family:var(--font-mono); font-size:0.72rem; color:var(--ink-soft);
+    text-align:center; margin-top:16px;
+  }
+
+  @media (max-width:800px){ .help-grid{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <div class="container">
+    <a href="index.html" class="logo">StudySarthi</a>
+    <a href="index.html" class="back-link">&larr; Back to Home</a>
+  </div>
+</header>
+
+<main class="help-page">
+  <div class="container">
+    <div class="help-intro">
+      <p class="eyebrow">Support</p>
+      <h1>Help & Support</h1>
+      <p>Have a question, a complaint, or found something broken? Pick a category below and let us know.</p>
+    </div>
+
+    <div class="help-grid">
+      <div class="help-card active" data-type="query">
+        <svg class="icon icon-accent" viewBox="0 0 24 24" style="width:26px;height:26px;"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 2-3 4"/><path d="M12 17h.01"/></svg>
+        <h3>General Query</h3>
+        <p>Ask a question about how something works.</p>
+      </div>
+      <div class="help-card" data-type="complaint">
+        <svg class="icon" style="color:var(--highlighter); width:26px; height:26px;" viewBox="0 0 24 24"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+        <h3>Complaint</h3>
+        <p>Something didn't work as expected — tell us what happened.</p>
+      </div>
+      <div class="help-card" data-type="bug">
+        <svg class="icon" style="color:var(--coral); width:26px; height:26px;" viewBox="0 0 24 24"><rect x="8" y="6" width="8" height="14" rx="4"/><path d="M8 10H4M20 10h-4M8 14H4M20 14h-4M12 6V3M9 3h6"/></svg>
+        <h3>Report a Bug</h3>
+        <p>Found something broken? Help us fix it.</p>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h2 id="form-title">General Query</h2>
+      <p class="sub" id="form-sub">Ask anything about using StudySarthi — we'll get back to you by email.</p>
+
+      <form id="help-form">
+        <div class="field">
+          <label for="h-name">Your name</label>
+          <input id="h-name" type="text" placeholder="Your name" required>
+        </div>
+        <div class="field">
+          <label for="h-email">Email</label>
+          <input id="h-email" type="email" placeholder="you@example.com" required>
+        </div>
+        <div class="field" id="steps-field" style="display:none;">
+          <label for="h-steps">Steps to reproduce</label>
+          <textarea id="h-steps" placeholder="1. Go to...&#10;2. Click on...&#10;3. See error"></textarea>
+        </div>
+        <div class="field">
+          <label for="h-message" id="message-label">Your message</label>
+          <textarea id="h-message" placeholder="Describe your question in detail..." required></textarea>
+        </div>
+        <button type="submit" class="submit-btn" id="submit-btn">Send Query</button>
+      </form>
+
+      <p class="confirm-msg" id="confirm-msg">✓ Thanks — your message has been noted. We'll get back to you by email.</p>
+      <p class="note-line">This form doesn't have a live backend yet — submissions are logged locally in this demo.</p>
+    </div>
+  </div>
+</main>
+
+<script>
+  const cards = document.querySelectorAll('.help-card');
+  const formTitle = document.getElementById('form-title');
+  const formSub = document.getElementById('form-sub');
+  const submitBtn = document.getElementById('submit-btn');
+  const stepsField = document.getElementById('steps-field');
+  const messageLabel = document.getElementById('message-label');
+  const messageInput = document.getElementById('h-message');
+
+  const CONFIG = {
+    query: {
+      title: 'General Query',
+      sub: "Ask anything about using StudySarthi — we'll get back to you by email.",
+      btn: 'Send Query',
+      placeholder: 'Describe your question in detail...',
+      showSteps: false
+    },
+    complaint: {
+      title: 'Submit a Complaint',
+      sub: "Tell us what didn't work as expected — we take these seriously.",
+      btn: 'Submit Complaint',
+      placeholder: 'What happened, and what did you expect instead?',
+      showSteps: false
+    },
+    bug: {
+      title: 'Report a Bug',
+      sub: "The more detail you give, the faster we can fix it.",
+      btn: 'Submit Bug Report',
+      placeholder: 'Describe what went wrong...',
+      showSteps: true
+    }
+  };
+
+  function setType(type){
+    cards.forEach(c => c.classList.toggle('active', c.dataset.type === type));
+    const cfg = CONFIG[type];
+    formTitle.textContent = cfg.title;
+    formSub.textContent = cfg.sub;
+    submitBtn.textContent = cfg.btn;
+    messageInput.placeholder = cfg.placeholder;
+    stepsField.style.display = cfg.showSteps ? 'flex' : 'none';
+  }
+
+  cards.forEach(card => {
+    card.addEventListener('click', () => setType(card.dataset.type));
+  });
+
+  document.getElementById('help-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    // No backend yet — logging locally as a placeholder for a real submission.
+    const activeType = document.querySelector('.help-card.active').dataset.type;
+    const entry = {
+      type: activeType,
+      name: document.getElementById('h-name').value,
+      email: document.getElementById('h-email').value,
+      message: document.getElementById('h-message').value,
+      steps: document.getElementById('h-steps').value,
+      date: new Date().toISOString()
+    };
+    try{
+      const log = JSON.parse(localStorage.getItem('studysarthi_help_submissions') || '[]');
+      log.push(entry);
+      localStorage.setItem('studysarthi_help_submissions', JSON.stringify(log));
+    }catch(err){}
+
+    document.getElementById('confirm-msg').classList.add('show');
+    e.target.reset();
+    setTimeout(() => document.getElementById('confirm-msg').classList.remove('show'), 4000);
+  });
+</script>
+
+</body>
+</html>

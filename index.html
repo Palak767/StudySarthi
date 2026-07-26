@@ -25,7 +25,7 @@
                         <li><a href="#how-it-works">How It Works</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
-                    <a href="auth.html" class="btn btn-primary">Get Started</a>
+                    <a href="auth.html" class="btn btn-primary js-get-started">Get Started</a>
                     <div class="menu-toggle" id="menu-toggle">
                         ☰
                     </div>
@@ -49,10 +49,10 @@
                             Stay focused,track your progress, and spend less time planning and more time learning.
                         </p>
                         <div class="hero-buttons">
-                            <a href="#" class="btn btn-primary">
+                            <a href="auth.html" class="btn btn-primary js-get-started">
                                 Get Started
                             </a>
-                            <a href="#" class="btn btn-outline">
+                            <a href="#features" class="btn btn-outline">
                                 Explore
                             </a>
                         </div>
@@ -332,19 +332,19 @@
             <div class="contact-info">
                 <h3>Contact Information</h3>
                 <div class="info-box">
-                    <span>📧</span>
+                    <svg class="icon icon-accent" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
                     <p>support@studysarthi.com</p>
                 </div>
                 <div class="info-box">
-                    <span>📞</span>
+                    <svg class="icon" style="color:var(--teal)" viewBox="0 0 24 24"><path d="M3 5a2 2 0 0 1 2-2h3l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v3a2 2 0 0 1-2 2h-1C8.6 19 3 13.4 3 6z"/></svg>
                     <p>+91 XXXXX XXXXX</p>
                 </div>
                 <div class="info-box">
-                    <span>📍</span>
+                    <svg class="icon" style="color:var(--coral)" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
                     <p>Noida, Uttar Pradesh, India</p>
                 </div>
                 <div class="info-box">
-                    <span>🕒</span>
+                    <svg class="icon" style="color:var(--highlighter)" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
                     <p>Monday – Friday | 9 AM – 6 PM</p>
                 </div>
             </div>
@@ -355,37 +355,56 @@
      FOOTER
 ========================== -->
 <footer class="footer">
-    <div class="container footer-container">
-        <div class="footer-about">
-            <h2>StudySarthi</h2>
-            <p>
-                Helping students organize academics, coding practice,
-                internships, and career growth in one place.
-            </p>
-        </div>
-        <div class="footer-links">
-            <h3>Quick Links</h3>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#how-it-works">How It Works</a></li>
-                <li><a href="dashboard.html">Dashboard</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-        <div class="footer-social">
-            <h3>Connect</h3>
-            <div class="social-icons">
-                <a href="#"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20"/></svg></a>
-                <a href="#"><svg class="icon" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-                <a href="#"><svg class="icon" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg></a>
-                <a href="#"><svg class="icon" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
+    <div class="container">
+        <div class="footer-container footer-container--expanded">
+            <div class="footer-brand">
+                <h2>StudySarthi</h2>
+                <p>Helping students organize academics, coding practice, internships, and career growth in one place.</p>
+                <div class="social-icons">
+                    <a href="#" aria-label="Website"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20"/></svg></a>
+                    <a href="https://github.com/Palak767" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icon" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
+                    <a href="mailto:support@studysarthi.com" aria-label="Email"><svg class="icon" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg></a>
+                    <a href="#" aria-label="LinkedIn"><svg class="icon" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="terms.html">Terms &amp; Conditions</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="help-support.html">Help & Support</a></li>
+                    <li><a href="help-support.html">Report a Bug</a></li>
+                </ul>
             </div>
         </div>
-    </div>
-    <div class="footer-bottom">
-        <p>© 2026 StudySarthi. Designed & Developed by Designed & Developed by
-<a href="https://github.com/Palak767" target="_blank">Palak Rani</a></p>
+
+        <div class="footer-bottom">
+            © 2026 StudySarthi. Designed &amp; Developed by <a href="https://github.com/Palak767" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline;">Palak Rani</a>
+        </div>
     </div>
 </footer>
         </main>

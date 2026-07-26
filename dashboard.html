@@ -6,6 +6,83 @@
     <title>Dashboard | StudySarthi</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <style>
+        a.card{ display:block; text-decoration:none; color:inherit; }
+
+        .schedule-header{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:25px;
+        }
+        .schedule-edit-btn{
+            background:none;
+            border:1px solid var(--border);
+            border-radius:var(--radius-sm);
+            padding:6px 12px;
+            font-family:var(--font-body);
+            font-size:0.8rem;
+            font-weight:600;
+            color:var(--ink-soft);
+            cursor:pointer;
+            display:flex;
+            align-items:center;
+            gap:6px;
+        }
+        .schedule-edit-btn:hover{ color:var(--coral); border-color:var(--coral); }
+
+        .schedule-item{ position:relative; }
+        .schedule-item-actions{
+            display:none;
+            gap:8px;
+        }
+        .schedule.editing .schedule-item-actions{ display:flex; }
+        .schedule-item-actions button{
+            background:none; border:none; cursor:pointer;
+            font-size:0.75rem; font-weight:600; color:var(--ink-soft);
+        }
+        .schedule-item-actions .del-btn:hover{ color:var(--coral); }
+        .schedule-item-actions .edit-item-btn:hover{ color:var(--teal); }
+
+        .schedule-item.inline-edit input{
+            font-family:var(--font-body);
+            font-size:0.9rem;
+            padding:6px 8px;
+            border:1px solid var(--border);
+            border-radius:var(--radius-sm);
+        }
+        .schedule-item.inline-edit input.time-input{ width:110px; margin-right:10px; }
+
+        .add-schedule-row{
+            display:none;
+            gap:10px;
+            padding-top:16px;
+            margin-top:6px;
+            border-top:1px dashed var(--border);
+        }
+        .schedule.editing .add-schedule-row{ display:flex; }
+        .add-schedule-row input{
+            font-family:var(--font-body);
+            font-size:0.85rem;
+            padding:8px 10px;
+            border:1px solid var(--border);
+            border-radius:var(--radius-sm);
+        }
+        .add-schedule-row .time-input{ width:110px; }
+        .add-schedule-row .task-input{ flex:1; }
+        .add-schedule-row button{
+            font-family:var(--font-display);
+            font-weight:600;
+            font-size:0.8rem;
+            color:var(--white);
+            background:var(--coral);
+            border:none;
+            border-radius:var(--radius-sm);
+            padding:0 16px;
+            cursor:pointer;
+        }
+    </style>
 </head>
 <body>
 <div class="dashboard-layout">
@@ -32,52 +109,46 @@
             </div>
         </header>
         <section class="cards">
-            <section class="cards">
-    <div class="card">
-        <div class="card-icon"><svg class="icon icon-accent" viewBox="0 0 24 24">
-        <rect x="6" y="4" width="12" height="18" rx="2"/>
-        <path d="M9 4.5h6"/>
-        <path d="M9 10h6"/>
-        <path d="M9 14h6"/>
-        <path d="M9 18h4"/></svg></div>
-        <h3>Today's Tasks</h3>
-        <p>5 Tasks Pending</p>
-    </div>
-    <div class="card">
-        <div class="card-icon"><svg class="icon" style="color:var(--coral)" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></div>
-        <h3>Learning Streak</h3>
-        <p>14 Days</p>
-    </div>
-    <div class="card">
-        <div class="card-icon"><svg class="icon icon-accent" viewBox="0 0 24 24"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></svg></div>
-        <h3>Weekly Progress</h3>
-        <p>82% Completed</p>
-    </div>
-    <div class="card">
-        <div class="card-icon"><svg class="icon icon-accent" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
-        <h3>Internship Tracker</h3>
-        <p>3 Applications Active</p>
-    </div>
-</section>
+            <a href="features/goals.html" class="card">
+                <div class="card-icon"><svg class="icon icon-accent" viewBox="0 0 24 24">
+                <rect x="6" y="4" width="12" height="18" rx="2"/>
+                <path d="M9 4.5h6"/>
+                <path d="M9 10h6"/>
+                <path d="M9 14h6"/>
+                <path d="M9 18h4"/></svg></div>
+                <h3>Today's Tasks</h3>
+                <p>5 Tasks Pending</p>
+            </a>
+            <a href="streak-history.html" class="card">
+                <div class="card-icon"><svg class="icon" style="color:var(--coral)" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></div>
+                <h3>Learning Streak</h3>
+                <p>14 Days</p>
+            </a>
+            <a href="features/analytics.html" class="card">
+                <div class="card-icon"><svg class="icon icon-accent" viewBox="0 0 24 24"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></svg></div>
+                <h3>Weekly Progress</h3>
+                <p>82% Completed</p>
+            </a>
+            <a href="features/internship-tracker.html" class="card">
+                <div class="card-icon"><svg class="icon icon-accent" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+                <h3>Internship Tracker</h3>
+                <p>3 Applications Active</p>
+            </a>
         </section>
         <section class="dashboard-bottom">
     <div class="schedule">
-        <h2><svg class="icon icon-accent" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>Today's Schedule</h2>
-        <div class="schedule-item">
-            <span>09:00 AM</span>
-            <p>Revise DBMS</p>
+        <div class="schedule-header">
+            <h2><svg class="icon icon-accent" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>Today's Schedule</h2>
+            <button class="schedule-edit-btn" id="schedule-edit-toggle">
+                <svg class="icon" viewBox="0 0 24 24" style="width:14px;height:14px;"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
+                Edit
+            </button>
         </div>
-        <div class="schedule-item">
-            <span>11:00 AM</span>
-            <p>Solve 2 LeetCode Problems</p>
-        </div>
-        <div class="schedule-item">
-            <span>02:00 PM</span>
-            <p>Apply for Summer Internship</p>
-        </div>
-        <div class="schedule-item">
-            <span>06:00 PM</span>
-            <p>Practice JavaScript</p>
+        <div id="schedule-list"></div>
+        <div class="add-schedule-row" id="add-schedule-row">
+            <input type="text" class="time-input" id="new-time" placeholder="e.g. 08:00 AM">
+            <input type="text" class="task-input" id="new-task" placeholder="Add a task...">
+            <button type="button" id="add-schedule-btn">Add</button>
         </div>
     </div>
     <div class="activity">
@@ -93,5 +164,108 @@
     </main>
 </div>
 <script src="js/dashboard.js"></script>
+<script>
+  const SCHEDULE_KEY = 'studysarthi_schedule';
+
+  const DEFAULT_SCHEDULE = [
+    { id: 'sch_1', time: '09:00 AM', task: 'Revise DBMS' },
+    { id: 'sch_2', time: '11:00 AM', task: 'Solve 2 LeetCode Problems' },
+    { id: 'sch_3', time: '02:00 PM', task: 'Apply for Summer Internship' },
+    { id: 'sch_4', time: '06:00 PM', task: 'Practice JavaScript' }
+  ];
+
+  function loadSchedule(){
+    try{
+      const raw = localStorage.getItem(SCHEDULE_KEY);
+      return raw ? JSON.parse(raw) : DEFAULT_SCHEDULE;
+    }catch(e){ return DEFAULT_SCHEDULE; }
+  }
+  function saveSchedule(items){
+    localStorage.setItem(SCHEDULE_KEY, JSON.stringify(items));
+  }
+
+  let schedule = loadSchedule();
+  let editing = false;
+
+  const scheduleEl = document.querySelector('.schedule');
+  const listEl = document.getElementById('schedule-list');
+  const editToggle = document.getElementById('schedule-edit-toggle');
+
+  function escapeHtml(str){
+    const div = document.createElement('div');
+    div.textContent = str || '';
+    return div.innerHTML;
+  }
+
+  function renderSchedule(){
+    if(schedule.length === 0){
+      listEl.innerHTML = `<p style="color:var(--ink-soft); padding:14px 0;">Nothing scheduled — add your first task below.</p>`;
+      return;
+    }
+    listEl.innerHTML = schedule.map(item => `
+      <div class="schedule-item" data-id="${item.id}">
+        <span>${escapeHtml(item.time)}</span>
+        <p>${escapeHtml(item.task)}</p>
+        <div class="schedule-item-actions">
+          <button class="edit-item-btn" onclick="editScheduleItem('${item.id}')">Edit</button>
+          <button class="del-btn" onclick="deleteScheduleItem('${item.id}')">Delete</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  editToggle.addEventListener('click', () => {
+    editing = !editing;
+    scheduleEl.classList.toggle('editing', editing);
+    editToggle.textContent = '';
+    const icon = document.createElement('span');
+    editToggle.innerHTML = editing
+      ? '<svg class="icon" viewBox="0 0 24 24" style="width:14px;height:14px;"><path d="m20 6-11 11L4 12"/></svg> Done'
+      : '<svg class="icon" viewBox="0 0 24 24" style="width:14px;height:14px;"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg> Edit';
+  });
+
+  window.deleteScheduleItem = function(id){
+    if(!confirm('Remove this schedule item?')) return;
+    schedule = schedule.filter(i => i.id !== id);
+    saveSchedule(schedule);
+    renderSchedule();
+  };
+
+  window.editScheduleItem = function(id){
+    const item = schedule.find(i => i.id === id);
+    if(!item) return;
+    const row = document.querySelector(`.schedule-item[data-id="${id}"]`);
+    row.classList.add('inline-edit');
+    row.innerHTML = `
+      <input type="text" class="time-input" value="${escapeHtml(item.time)}" id="edit-time-${id}">
+      <input type="text" style="flex:1;" value="${escapeHtml(item.task)}" id="edit-task-${id}">
+      <div class="schedule-item-actions" style="display:flex;">
+        <button onclick="saveScheduleItem('${id}')">Save</button>
+      </div>
+    `;
+  };
+
+  window.saveScheduleItem = function(id){
+    const item = schedule.find(i => i.id === id);
+    if(!item) return;
+    item.time = document.getElementById(`edit-time-${id}`).value.trim();
+    item.task = document.getElementById(`edit-task-${id}`).value.trim();
+    saveSchedule(schedule);
+    renderSchedule();
+  };
+
+  document.getElementById('add-schedule-btn').addEventListener('click', () => {
+    const time = document.getElementById('new-time').value.trim();
+    const task = document.getElementById('new-task').value.trim();
+    if(!task) return;
+    schedule.push({ id: 'sch_' + Date.now(), time: time || '—', task });
+    saveSchedule(schedule);
+    document.getElementById('new-time').value = '';
+    document.getElementById('new-task').value = '';
+    renderSchedule();
+  });
+
+  renderSchedule();
+</script>
 </body>
 </html>

@@ -2,36 +2,17 @@
 // StudySarthi Settings
 // ===============================
 
-// Save buttons
-const saveButtons = document.querySelectorAll(".save-btn");
-
-saveButtons.forEach(button => {
-
-    button.addEventListener("click", () => {
-
-        showToast();
-
-    });
-
-});
 // ==========================
 // Toast
 // ==========================
 
 function showToast(message = "Settings saved successfully!") {
-
-    const toast = document.getElementById("toast");
-
-    toast.textContent = "✅ " + message;
-
+    const toast = document.getElementById("toast");const textNode = toast.querySelector('.toast-text') || toast;
+    textNode.textContent = message;
     toast.classList.add("show");
-
     setTimeout(() => {
-
         toast.classList.remove("show");
-
     }, 2500);
-
 }
 
 // ==========================

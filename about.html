@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>About Us — StudySarthi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/responsive.css">
+<style>
+  body{ background-color:var(--paper); }
+  .page-header{ background:var(--white); border-bottom:1px solid var(--border); padding:20px 0; }
+  .page-header .container{ display:flex; align-items:center; justify-content:space-between; }
+  .back-link{ font-family:var(--font-body); font-weight:600; font-size:0.9rem; color:var(--ink-soft); }
+  .back-link:hover{ color:var(--coral); }
+
+  .legal-page{ padding:56px 0 90px; }
+  .legal-content{ max-width:720px; margin:0 auto; }
+  .eyebrow{
+    font-family:var(--font-mono); font-size:0.75rem; letter-spacing:0.06em;
+    text-transform:uppercase; color:var(--coral); margin-bottom:10px;
+  }
+  .legal-content h1{ font-family:var(--font-display); font-size:2.1rem; margin-bottom:18px; }
+  .legal-content h2{ font-family:var(--font-display); font-size:1.25rem; margin:34px 0 12px; }
+  .legal-content p{ color:var(--ink-soft); line-height:1.75; margin-bottom:14px; }
+  .legal-content ul{ color:var(--ink-soft); line-height:1.8; padding-left:20px; margin-bottom:14px; }
+  .legal-content strong{ color:var(--ink); }
+
+  .about-card{
+    background:var(--white); border:1px solid var(--border); border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-sm); padding:24px; margin-top:28px;
+  }
+  .about-card .role{
+    font-family:var(--font-mono); font-size:0.75rem; color:var(--ink-soft); margin-bottom:6px;
+  }
+  .about-card h3{ font-family:var(--font-display); }
+  .about-card a{ color:var(--coral); font-weight:600; }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <div class="container">
+    <a href="index.html" class="logo">StudySarthi</a>
+    <a href="index.html" class="back-link">&larr; Back to Home</a>
+  </div>
+</header>
+
+<main class="legal-page">
+  <div class="container">
+    <div class="legal-content">
+      <p class="eyebrow">About</p>
+      <h1>Why StudySarthi exists</h1>
+
+      <p>StudySarthi started from a simple annoyance: keeping track of notes, internship applications, coding practice, and daily goals meant bouncing between five different apps and losing time to context-switching instead of actually studying.</p>
+
+      <p>This project is a solo build — an all-in-one student workspace that puts those pieces in one place. It's currently a personal/internship project and a work in progress, not a finished commercial product, and it's built and maintained by one person.</p>
+
+      <h2>What's real right now</h2>
+      <p>Smart Notes, the Internship Tracker, Goal Planner, Coding Practice log, and Progress Analytics are fully working tools — they save your data locally in your browser using <code>localStorage</code>, so there's no account sync across devices yet. The AI Study Assistant is currently a rule-based preview, clearly labeled as such, while a real AI-powered version is planned.</p>
+
+      <h2>What's next</h2>
+      <ul>
+        <li>Real account authentication (Firebase or Supabase), so your data syncs across devices</li>
+        <li>A genuine LLM-powered Study Assistant</li>
+        <li>Continued mobile and accessibility improvements</li>
+      </ul>
+
+      <div class="about-card">
+        <p class="role">Built &amp; maintained by</p>
+        <h3>Palak Rani</h3>
+        <p>Student developer building StudySarthi as an internship project and portfolio piece. Code and progress are public on <a href="https://github.com/Palak767" target="_blank" rel="noopener">GitHub</a>.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>

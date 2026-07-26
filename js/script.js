@@ -56,3 +56,8 @@ if (contactForm) {
     });
 }
 });
+(function(){
+  const loggedInThisSession = sessionStorage.getItem('studysarthi_logged_in') === 'true';
+  const target = loggedInThisSession ? 'dashboard.html' : 'auth.html';
+  document.querySelectorAll('.js-get-started').forEach(btn => btn.setAttribute('href', target));
+})();
