@@ -4,17 +4,22 @@
 .dashboard-layout{
     display:flex;
     min-height:100vh;
-    background:#f5f7fb;
+    background:var(--paper);
+    background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size:28px 28px;
 }
 .sidebar{
     width:260px;
-    background:white;
+    background:var(--white);
     padding:40px 25px;
-    box-shadow:5px 0 20px rgba(0,0,0,.05);
+    border-right:1px solid var(--border);
 }
 .logo{
-    color:var(--primary);
+    color:var(--ink);
     margin-bottom:50px;
+    font-family:var(--font-display);
 }
 .sidebar ul{
     list-style:none;
@@ -28,12 +33,12 @@
     font-weight:500;
 }
 .sidebar li:hover{
-    background:#f0efff;
-    color:var(--primary);
+    background:rgba(255,111,89,.12);
+    color:var(--coral);
 }
 .sidebar li.active{
-    background:var(--primary);
-    color:white;
+    background:var(--coral);
+    color:var(--white);
 }
 .main-content{
     flex:1;
@@ -58,20 +63,21 @@
     gap:25px;
 }
 .card{
-    background:white;
+    background:var(--white);
     padding:30px;
-    border-radius:18px;
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-sm);
     transition:.3s ease;
 }
 .card:hover{
-    transform:translateY(-8px);
-    box-shadow:0 20px 40px rgba(0,0,0,.12);
+    transform:translate(-3px,-3px);
+    box-shadow:9px 9px 0 rgba(27,42,74,.1);
 }
 .card-icon{
     width:60px;
     height:60px;
-    background:#eef2ff;
+    background:rgba(255,111,89,.12);
     border-radius:50%;
     display:flex;
     align-items:center;
@@ -84,7 +90,7 @@
     font-size:1.3rem;
 }
 .card p{
-    color:var(--gray);
+    color:var(--ink-soft);
 }
 /* ==========================
    DASHBOARD BOTTOM
@@ -97,10 +103,11 @@
 }
 .schedule,
 .activity{
-    background:white;
-    border-radius:18px;
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
     padding:30px;
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    box-shadow:var(--shadow-sm);
 }
 .schedule h2,
 .activity h2{
@@ -117,7 +124,7 @@
     border:none;
 }
 .schedule-item span{
-    color:var(--primary);
+    color:var(--coral);
     font-weight:600;
 }
 .activity ul{
@@ -125,8 +132,28 @@
 }
 .activity li{
     padding:15px 0;
-    border-bottom:1px solid #ececec;
+    border-bottom:1px solid var(--border);
 }
 .activity li:last-child{
     border:none;
+}
+.sidebar li a{
+    display:block;
+    width:100%;
+    height:100%;
+    color:inherit;
+    text-decoration:none;
+}
+.profile-avatar{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:var(--coral);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:700;
+    font-size:1rem;
+    font-family:var(--font-display);
 }

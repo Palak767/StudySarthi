@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings | StudySarthi</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/settings.css">
+</head>
+<body>
+<div class="dashboard-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+    <h2 class="logo">
+        📚 StudySarthi
+    </h2>
+
+    <ul>
+
+        <li>
+            <a href="dashboard.html">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <rect x="3" y="3" width="7" height="7"/>
+                    <rect x="14" y="3" width="7" height="7"/>
+                    <rect x="3" y="14" width="7" height="7"/>
+                    <rect x="14" y="14" width="7" height="7"/>
+                </svg>
+                Dashboard
+            </a>
+        </li>
+
+        <li>
+            <a href="index.html">
+                <svg class="icon icon-accent" viewBox="0 0 24 24">
+                    <path d="M3 10.5 12 3l9 7.5"/>
+                    <path d="M5 9.5V21h14V9.5"/>
+                    <path d="M9 21v-6h6v6"/>
+                </svg>
+                Home
+            </a>
+        </li>
+
+        <li>
+            <a href="features/notes.html">
+                <svg class="icon icon-accent" viewBox="0 0 24 24">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                    <path d="M14 2v6h6"/>
+                    <path d="M8 13h8"/>
+                    <path d="M8 17h6"/>
+                </svg>
+                Notes
+            </a>
+        </li>
+
+        <li>
+            <a href="features/coding-practice.html">
+                <svg class="icon icon-accent" viewBox="0 0 24 24">
+                    <path d="m8 16-4-4 4-4"/>
+                    <path d="m16 8 4 4-4 4"/>
+                    <path d="m14 4-4 16"/>
+                </svg>
+                Coding Practice
+            </a>
+        </li>
+
+        <li>
+            <a href="features/internship-tracker.html">
+                <svg class="icon icon-accent" viewBox="0 0 24 24">
+                    <rect x="2" y="7" width="20" height="14" rx="2"/>
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                </svg>
+                Internship Tracker
+            </a>
+        </li>
+
+        <li>
+            <a href="features/ai-assistant.html">
+                <svg class="icon icon-accent" viewBox="0 0 24 24">
+                    <path d="M12 2v3"/>
+                    <rect x="5" y="7" width="14" height="11" rx="2"/>
+                    <circle cx="9" cy="12" r="1"/>
+                    <circle cx="15" cy="12" r="1"/>
+                    <path d="M9 16h6"/>
+                    <path d="M3 10h2"/>
+                    <path d="M19 10h2"/>
+                </svg>
+                AI Mentor
+            </a>
+        </li>
+
+        <li class="active">
+            <a href="settings.html">
+                <svg class="icon icon-accent" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-1.8-.3 1.6 1.6 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.2a1.6 1.6 0 0 0-1-1.5 1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 .3-1.8 1.6 1.6 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.2a1.6 1.6 0 0 0 1.5-1 1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9A1.6 1.6 0 0 0 10 3.2V3a2 2 0 1 1 4 0v.2a1.6 1.6 0 0 0 1 1.5 1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.2a1.6 1.6 0 0 0-1.4 1z"/>
+                </svg>
+                Settings
+            </a>
+        </li>
+
+    </ul>
+</aside>
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="topbar">
+            <h1>Settings</h1>
+        </header>
+        <!-- Profile -->
+<section class="settings-card">
+    <h2><svg class="icon" style="color:var(--ink)" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg> Profile</h2>
+    <div class="settings-grid">
+        <div class="input-group">
+            <label>Full Name</label>
+            <input id="fullName" type="text" value="Palak">
+        </div>
+        <div class="input-group">
+            <label>Email</label>
+            <input id="email" type="email" value="palak@example.com">
+        </div>
+        <div class="input-group">
+            <label>University</label>
+            <input id="university" type="text" value="Galgotias University">
+        </div>
+        <div class="input-group">
+            <label>Course</label>
+            <input id="course" type="text" value="B.Tech CSE (AI & ML)">
+        </div>
+        <div class="input-group">
+            <label>Semester</label>
+            <input id="semester" type="text" value="5th Semester">
+        </div>
+    </div>
+    
+    <button class="btn btn-primary save-btn">
+        Save Changes
+    </button>
+</section>
+        <!-- Appearance -->
+<section class="settings-card">
+    <h2>🎨 Appearance</h2>
+    <div class="settings-grid">
+        <div class="input-group">
+            <label>Theme</label>
+            <select id="themeSelect">
+                <option selected>Light</option>
+                <option>Dark</option>
+                <option>System</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label>Accent Color</label>
+            <select id="accentColor">
+                <option selected>Coral</option>
+                <option>Blue</option>
+                <option>Green</option>
+                <option>Purple</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label>Font Size</label>
+            <select id="fontSize">
+                <option>Small</option>
+                <option selected>Medium</option>
+                <option>Large</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label>Dashboard Density</label>
+            <select id="studyGoal">
+                <option selected>Comfortable</option>
+                <option>Compact</option>
+            </select>
+        </div>
+    </div>
+    <button class="btn btn-primary save-btn">
+        Save Appearance
+    </button>
+</section>
+        <!-- Notifications -->
+<section class="settings-card">
+    <h2><svg class="icon" style="color:var(--highlighter)" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg> Notifications</h2>
+    <div class="toggle-list">
+        <div class="toggle-item">
+            <div>
+                <h4>Daily Study Reminder</h4>
+                <p>Receive reminders to stay consistent with your study schedule.</p>
+            </div>
+            <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div class="toggle-item">
+            <div>
+                <h4>Assignment & Deadline Alerts</h4>
+                <p>Get notified before important deadlines.</p>
+            </div>
+            <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div class="toggle-item">
+            <div>
+                <h4>Weekly Progress Report</h4>
+                <p>Receive a summary of your weekly performance.</p>
+            </div>
+            <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div class="toggle-item">
+            <div>
+                <h4>Internship Updates</h4>
+                <p>Be notified about internship opportunities.</p>
+            </div>
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div class="toggle-item">
+            <div>
+                <h4>AI Study Tips</h4>
+                <p>Receive personalized AI learning suggestions.</p>
+            </div>
+            <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
+    <button class="btn btn-primary save-btn">
+        Save Notification Settings
+    </button>
+</section>
+        <!-- Study Preferences -->
+<section class="settings-card">
+    <h2><svg class="icon icon-accent" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Study Preferences</h2>
+    <div class="settings-grid">
+        <div class="input-group">
+            <label>Daily Study Goal (Hours)</label>
+            <input type="number" value="4" min="1" max="12">
+        </div>
+        <div class="input-group">
+            <label>Preferred Programming Language</label>
+            <select>
+                <option>C++</option>
+                <option>Java</option>
+                <option>Python</option>
+                <option>JavaScript</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label>Preferred Study Time</label>
+            <select>
+                <option>Morning</option>
+                <option>Afternoon</option>
+                <option selected>Evening</option>
+                <option>Night</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label>Pomodoro Duration</label>
+            <select>
+                <option>25 Minutes</option>
+                <option selected>30 Minutes</option>
+                <option>45 Minutes</option>
+                <option>60 Minutes</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label>Break Duration</label>
+            <select>
+                <option selected>5 Minutes</option>
+                <option>10 Minutes</option>
+                <option>15 Minutes</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label>Weekly Study Target (Hours)</label>
+            <input type="number" value="28" min="1">
+        </div>
+    </div>
+    <button class="btn btn-primary save-btn">
+        Save Study Preferences
+    </button>
+</section>
+        <!-- AI Preferences -->
+<section class="settings-card">
+    <h2><svg class="icon icon-accent" viewBox="0 0 24 24"><path d="M12 3v4M3 12h4M12 17v4M17 12h4"/><path d="m8 8 1-1 1 1-1 1z"/></svg> AI Preferences</h2>
+    <div class="settings-grid">
+        <div class="input-group">
+            <label>Default AI Assistant</label>
+            <select>
+                <option selected>Study Mentor</option>
+                <option>Coding Assistant</option>
+                <option>Interview Coach</option>
+                <option>Career Guide</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label>AI Response Style</label>
+            <select>
+                <option>Concise</option>
+                <option selected>Balanced</option>
+                <option>Detailed</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label>Preferred Language</label>
+            <select>
+                <option selected>English</option>
+                <option>Hindi</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label>Learning Focus</label>
+            <select>
+                <option selected>Academics</option>
+                <option>DSA</option>
+                <option>Web Development</option>
+                <option>AI / ML</option>
+                <option>Placements</option>
+            </select>
+        </div>
+    </div>
+    <div class="toggle-list">
+        <div class="toggle-item">
+            <div>
+                <h4>Personalized Study Suggestions</h4>
+                <p>Allow AI to recommend topics based on your activity.</p>
+            </div>
+            <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div class="toggle-item">
+            <div>
+                <h4>Smart Learning Tips</h4>
+                <p>Receive AI-powered productivity and revision tips.</p>
+            </div>
+            <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div class="toggle-item">
+            <div>
+                <h4>Remember Conversation Context</h4>
+                <p>Allow the AI Mentor to personalize future responses.</p>
+            </div>
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
+    <button class="btn btn-primary save-btn">
+        Save AI Preferences
+    </button>
+</section>
+        <!-- Privacy & Security -->
+<section class="settings-card">
+    <h2>🔒 Privacy & Security</h2>
+    <div class="settings-grid">
+        <div class="input-group">
+            <label>Current Password</label>
+            <input type="password" placeholder="••••••••">
+        </div>
+        <div class="input-group">
+            <label>New Password</label>
+            <input type="password" placeholder="Enter new password">
+        </div>
+        <div class="input-group">
+            <label>Confirm Password</label>
+            <input type="password" placeholder="Confirm new password">
+        </div>
+        <div class="input-group">
+            <label>Recovery Email</label>
+            <input type="email" value="palak@example.com">
+        </div>
+    </div>
+    <button class="btn btn-primary save-btn">
+        Update Password
+    </button>
+    <hr class="settings-divider">
+    <div class="toggle-list">
+        <div class="toggle-item">
+            <div>
+                <h4>Two-Factor Authentication</h4>
+                <p>Add an extra layer of security to your account.</p>
+            </div>
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div class="toggle-item">
+            <div>
+                <h4>Remember This Device</h4>
+                <p>Stay signed in on this browser.</p>
+            </div>
+            <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div class="toggle-item">
+            <div>
+                <h4>Email Login Alerts</h4>
+                <p>Receive an email whenever your account signs in from a new device.</p>
+            </div>
+            <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
+</section>
+        <!-- Data & Backup -->
+<section class="settings-card">
+    <h2>💾 Data & Backup</h2>
+    <div class="action-grid">
+        <div class="action-card">
+            <h3>📄 Export Notes</h3>
+            <p>Download all your notes for offline access.</p>
+            <button class="btn btn-outline">Export</button>
+        </div>
+        <div class="action-card">
+            <h3>📊 Export Progress</h3>
+            <p>Download your study statistics and reports.</p>
+            <button class="btn btn-outline">Export</button>
+        </div>
+        <div class="action-card">
+            <h3>🧹 Clear Cache</h3>
+            <p>Remove temporary files to improve performance.</p>
+            <button class="btn btn-outline">Clear</button>
+        </div>
+        <div class="action-card">
+            <h3>🔄 Reset Preferences</h3>
+            <p>Restore all settings to their default values.</p>
+            <button class="btn btn-outline">Reset</button>
+        </div>
+    </div>
+</section>
+<section class="settings-card logout-card">
+    <h2>🚪 Logout</h2>
+    <p>Sign out securely from your StudySarthi account.</p>
+    <button class="btn btn-primary logout-btn">
+        Logout
+    </button>
+</section>
+    </main>
+</div>
+<script src="js/settings.js"></script>
+<div id="toast" class="toast">
+    <svg class="icon" style="color:var(--teal)" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg> Settings saved successfully!
+</div>
+</body>
+</html>
