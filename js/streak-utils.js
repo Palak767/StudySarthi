@@ -7,22 +7,8 @@
  * lives here once instead of being copy-pasted per page.
  */
 
-/**
- * Returns a local "YYYY-MM-DD" string for a given Date (defaults to now).
- * Deliberately avoids toISOString(), which converts to UTC and can shift
- * the date backward by a day for any timezone ahead of UTC (e.g. IST,
- * UTC+5:30) — that mismatch was causing streaks to always read as 0.
- */
-function toLocalDateStr(date){
-  const d = date || new Date();
-  const year = d.getFullYear();
-  const month = String(d.getMonth() + 1).padStart(2, '0');
-  const day = String(d.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
-}
-
 function todayStr(){
-  return toLocalDateStr(new Date());
+  return new Date().toISOString().slice(0, 10);
 }
 
 /**
@@ -47,7 +33,7 @@ function calcStreak(dates){
   }
 
   while(true){
-    const iso = toLocalDateStr(cursor);
+    const iso = cursor.toISOString().slice(0, 10);
     if(dateSet.has(iso)){
       streak++;
       cursor.setDate(cursor.getDate() - 1);
