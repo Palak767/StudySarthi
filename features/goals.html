@@ -207,7 +207,7 @@
       <p class="eyebrow">Feature · Goal Planner</p>
       <h1>Small daily goals, real momentum</h1>
       <p>Set daily, weekly, or one-time goals and check them off as you go. Your streak counts real completed days — not a made-up number.</p>
-      <span class="storage-note">💾 Saved to this browser only — no account sync yet</span>
+      <span class="storage-note">☁️ Goals are securely stored in Firebase.</span>    
     </div>
 
     <div class="streak-banner">
@@ -252,32 +252,25 @@
 </main>
 
 <script>
-  const GOALS_KEY = 'studysarthi_goals';
-  const HISTORY_KEY = 'studysarthi_goal_history'; // array of ISO date strings where >=1 goal was completed
+  
+let goals = [];
+let history = [];
 
-  function loadGoals(){
-    try{ return JSON.parse(localStorage.getItem(GOALS_KEY)) || []; }catch(e){ return []; }
-  }
-  function saveGoals(g){ localStorage.setItem(GOALS_KEY, JSON.stringify(g)); }
+async function fetchGoals() {
+    try {
 
-  function loadHistory(){
-    try{ return JSON.parse(localStorage.getItem(HISTORY_KEY)) || []; }catch(e){ return []; }
-  }
-  function saveHistory(h){ localStorage.setItem(HISTORY_KEY, JSON.stringify(h)); }
+        const response = await fetch("http://localhost:5000/api/goals");
 
-  // todayStr() and calcStreak() come from js/streak-utils.js
+        const result = await response.json();
 
-  let goals = loadGoals();
-  let history = loadHistory();
+        goals = result.data;
 
-  // Reset daily goals if last opened on a previous day
-  const today = todayStr();
-  goals.forEach(g => {
-    if(g.freq === 'daily' && g.lastCompletedDate && g.lastCompletedDate !== today){
-      g.done = false;
+        render();
+
+    } catch (err) {
+        console.error(err);
     }
-  });
-  saveGoals(goals);
+}
 
   const form = document.getElementById('goal-form');
   const list = document.getElementById('goal-list');
@@ -303,59 +296,98 @@
       return;
     }
 
-    list.innerHTML = goals.map(g => `
+    const html = goals.map(g => `
       <div class="goal-row ${g.done ? 'done' : ''}">
         <div class="goal-check ${g.done ? 'checked' : ''}" onclick="toggleGoal('${g.id}')">
           ${g.done ? '✓' : ''}
         </div>
         <div class="goal-title">${escapeHtml(g.title)}</div>
-        <span class="goal-freq">${FREQ_LABELS[g.freq]}</span>
+        <span class="goal-freq">${g.freq}</span>
         <button class="goal-delete" onclick="deleteGoal('${g.id}')">Delete</button>
       </div>
-    `).join('');
+`).join('');
+
+console.log(html);
+
+list.innerHTML = html;
 
     renderStreak();
   }
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async(e) => {
     e.preventDefault();
-    const title = document.getElementById('goal-title').value.trim();
-    const freq = document.getElementById('goal-freq').value;
-    goals.push({
-      id: 'goal_' + Date.now() + '_' + Math.random().toString(36).slice(2,7),
-      title, freq, done:false, lastCompletedDate:null
-    });
-    saveGoals(goals);
-    form.reset();
-    render();
+    const title = document.getElementById("goal-title").value.trim();
+const freq = document.getElementById("goal-freq").value;
+
+async function fetchGoals() {
+    try {
+        console.log("Fetching goals...");
+
+        const response = await fetch("http://localhost:5000/api/goals");
+        console.log("Status:", response.status);
+
+        const result = await response.json();
+        console.log("Result:", result);
+
+        goals = result.data || [];
+        
+        console.log("Render called with:", goals);
+        console.log("Goals length:", goals.length);
+        console.log("Goals:", goals);
+
+        render();
+
+    } catch (err) {
+        console.error("Fetch Error:", err);
+    }
+}
   });
 
-  window.toggleGoal = function(id){
-    const g = goals.find(g => g.id === id);
-    if(!g) return;
-    g.done = !g.done;
-    g.lastCompletedDate = g.done ? todayStr() : null;
-    saveGoals(goals);
+  window.toggleGoal = async function(id){
 
-    // update history: if ANY goal is done today, today counts toward streak
-    const doneTodayCheck = goals.some(x => x.done);
-    if(doneTodayCheck){
-      if(!history.includes(todayStr())) history.push(todayStr());
-    } else {
-      history = history.filter(d => d !== todayStr());
+    const goal = goals.find(g => g.id === id);
+
+    if(!goal) return;
+
+    const done = !goal.done;
+
+    try{
+
+        await fetch(`http://localhost:5000/api/goals/${id}`,{
+            method:"PUT",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({
+                done,
+                lastCompletedDate: done ? todayStr() : null
+            })
+        });
+
+        fetchGoals();
+
+    }catch(error){
+        console.error(error);
     }
-    saveHistory(history);
-    render();
-  };
 
-  window.deleteGoal = function(id){
+}
+window.deleteGoal = async function(id){
+
     if(!confirm("Delete this goal?")) return;
-    goals = goals.filter(g => g.id !== id);
-    saveGoals(goals);
-    render();
-  };
 
-  render();
+    try{
+
+        await fetch(`http://localhost:5000/api/goals/${id}`,{
+            method:"DELETE"
+        });
+
+        fetchGoals();
+
+    }catch(error){
+        console.error(error);
+    }
+
+}
 </script>
 
 </body>
